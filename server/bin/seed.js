@@ -40,7 +40,13 @@ const itineraries = [
                 }
             }
         ],
-        messages: []
+        messages: [
+            {
+                user: '5fcbc6afbee1e9784858e58c',
+                text: 'sjflsjdflsjdflkjsdkf',
+                rating: 5
+            }
+        ]
     }
 ]
 

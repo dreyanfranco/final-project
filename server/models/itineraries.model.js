@@ -8,7 +8,7 @@ const messageSchema = new Schema({
         required: true
     },
     rating: {
-        type: String,
+        type: Number,
         enum: [0, 1, 2, 3, 4, 5]
     },
 }, {
