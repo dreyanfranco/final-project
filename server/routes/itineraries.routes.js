@@ -44,6 +44,7 @@ router.put('/editItinerary/:itinerary_id', (req, res) => {
 
 router.post('/:id/message', (req, res) => {
     Itineraries
+        
         .findByIdAndUpdate(req.params.id, { $push: { messages: req.body.message } }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
