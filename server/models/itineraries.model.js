@@ -9,7 +9,8 @@ const messageSchema = new Schema({
     },
     rating: {
         type: Number,
-        enum: [0, 1, 2, 3, 4, 5]
+        enum: [0, 1, 2, 3, 4, 5],
+        default: 3
     },
 }, {
     timestamps: true
@@ -23,7 +24,7 @@ const spotsSchema = new Schema({
         trim: true,
     },
     name: {
-        type: String // google nombre ejemplo: sol
+        type: String // google nombre ejemplo: sol (autocomplete)
     },
     spotImage: {
         type: String,
@@ -47,11 +48,18 @@ const itinerariesSchema = new Schema({
         trim: true,
         set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
+    cityName: {
+        type: String // google nombre ejemplo: madrid (autocomplete)
+    },
     description: {
         type: String,
         required: true,
         default: 'Desconocido',
         trim: true,
+    },
+    itineraryImage: {
+        type: String,
+        trim: true
     },
     cityLocation: {
         type: {

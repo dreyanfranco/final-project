@@ -42,21 +42,6 @@ router.put('/editItinerary/:itinerary_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/:id/message', (req, res) => {
-    Itineraries
-        
-        .findByIdAndUpdate(req.params.id, { $push: { messages: req.body.message } }, { new: true })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-}) // no funciona
-
-router.post('/:id/new-spots', (req, res) => {
-    Itineraries
-        .findByIdAndUpdate(req.params.id, { $push: { spots: req.body.spots } }, { new: true })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
-
 router.delete('/deleteItinerary/:itinerary_id', (req, res) => {
 
     Itineraries
@@ -65,8 +50,34 @@ router.delete('/deleteItinerary/:itinerary_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// falta editar y eliminar spot
+router.post('/:id/message', (req, res) => {
+    Itineraries
+        .findByIdAndUpdate(req.params.id, { $push: { messages: req.body } }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
+router.post('/:id/new-spots', (req, res) => {
+    Itineraries
+        .findByIdAndUpdate(req.params.id, { $push: { spots: req.body } }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
+// no funciona editar
+router.put('/editSpot/:spot_id', (req, res) => {
+    Itineraries
+        .findByIdAndUpdate(req.params.spot_id, req.body)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+// no funciona eliminar
+router.post('/:id/deleteSpot/:spot_id', (req, res) => {
+    Itineraries
+        .findByIdAndUpdate(req.params.id, { $pull: { spots: req.body } }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 module.exports = router
