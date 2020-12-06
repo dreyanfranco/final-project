@@ -28,4 +28,4 @@ $ npm start
 | 10 | post | /:id/message | Crea valoración y comentario | Server |
 | 11 | post | /:id/new-spots | Crea nuevo spot | Server |
 | 13 | get | /getAllUsers | Obtiene los usuarios (solo ADMIN)| Server |
-| 12 | get | /deleteUser/:user_id' | Elimina usuario (solo ADMIN)  | Server |
+| 12 | delete | /deleteUser/:user_id' | Elimina usuario (solo ADMIN)  | Server |
