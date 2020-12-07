@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
-const Itineraries = require('../models/itineraries.model')
-// const Spots = require('../models/spots.model')
+const Itineraries = require('../models/itinerary.model')
 const User = require('../models/user.model')
 
 const dbtitle = 'travel'
 mongoose.connect(`mongodb://localhost/${dbtitle}`)
 
 Itineraries.collection.drop()
-// Spots.collection.drop()
 User.collection.drop()
 
 const itineraries = [
@@ -104,7 +102,7 @@ const users = [
         password: "isa",
         description: 'Lorem fksdfhsdhshaLJSLKDJFLKASJFLSJFLKJSAF',
         role: "USER",
-        itineraries: []
+        itinerariesSaved: []
     }
 ]
 
