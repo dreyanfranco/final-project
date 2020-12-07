@@ -65,9 +65,9 @@ router.post('/:id/new-spots', (req, res) => {
 })
 
 // no funciona editar
-router.put('/editSpot/:spot_id', (req, res) => {
+router.put('/:id/editSpot/:spot_id', (req, res) => {
     Itineraries
-        .findByIdAndUpdate(req.params.spot_id, req.body)
+        .findByIdAndUpdate(req.params.id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
