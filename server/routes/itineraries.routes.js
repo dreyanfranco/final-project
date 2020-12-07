@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 const Itineraries = require('../models/itinerary.model')
+const Spots = require('../models/spot.model')
 
 
 router.get('/getAllItineraries', (req, res) => {
@@ -57,25 +58,28 @@ router.post('/:id/message', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/:id/new-spots', (req, res) => {
-    Itineraries
-        .findByIdAndUpdate(req.params.id, { $push: { spots: req.body } }, { new: true })
+router.post('/:id/newSpot', (req, res) => {
+    
+    Spots
+        .create(req.body)
+        .then(theSpot => {return theSpot})
+        .then(theSpot => Itineraries.findByIdAndUpdate(req.params.id, { $push: {spots: theSpot.id} }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
-// no funciona editar
-router.put('/:id/editSpot/:spot_id', (req, res) => {
-    Itineraries
-        .findByIdAndUpdate(req.params.id, req.body)
+router.put('/editSpot/:spot_id', (req, res) => {
+    Spots
+        .findByIdAndUpdate(req.params.spot_id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
-// no funciona eliminar
-router.post('/:id/deleteSpot/:spot_id', (req, res) => {
-    Itineraries
-        .findByIdAndUpdate(req.params.id, { $pull: { spots: req.body } }, { new: true })
+// lo elimina de spot pero no de itinerarios
+router.delete('/deleteSpot/:spot_id', (req, res) => {
+    Spots
+        .findByIdAndDelete(req.params.spot_id)
+        .then(Itineraries.findByIdAndUpdate(req.params.spot_id, { $pull: { spots: req.params.spot_id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

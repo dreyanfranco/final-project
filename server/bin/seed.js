@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const Itineraries = require('../models/itinerary.model')
+const Spots = require('../models/spot.model')
 const User = require('../models/user.model')
 
 const dbtitle = 'travel'
 mongoose.connect(`mongodb://localhost/${dbtitle}`)
 
 Itineraries.collection.drop()
+Spots.collection.drop()
 User.collection.drop()
 
 const itineraries = [
@@ -18,27 +20,8 @@ const itineraries = [
             coordinates: [41.158071958696496, -8.62913418093418]
         },
         duration: '3 días',
-        owner: '5fcbc6afbee1e9784858e58c',
-        spots: [
-            {
-                name: 'Torre de los clérigos',
-                description: 'La Iglesia de los Clérigos fue construida en el siglo XVIII y su visita es gratuita.',
-                spotImage: 'https://catshostels.com/wp-content/uploads/2019/06/1.-Clerigos-tower-1024x589.jpg',
-                spotLocation: {
-                    type: 'Point',
-                    coordinates: [41.14585630268839, -8.613987774364723]
-                }
-            },
-            {
-                name: 'La catedral de la sé',
-                description: 'Ha sido declarado monumento nacional portugués y por eso debería ser uno de los lugares obligatorios que ver en Oporto.',
-                spotImage: 'https://catshostels.com/wp-content/uploads/2019/06/4.-S%C3%A9-Cathedral-600x345.jpg',
-                spotLocation: {
-                    type: 'Point',
-                    coordinates: [41.14286198075304, -8.611115882104372]
-                }
-            }
-        ],
+        owner: '',
+        spots: [],
         messages: [
             {
                 user: '5fcbc6afbee1e9784858e58c',
@@ -56,27 +39,8 @@ const itineraries = [
             coordinates: [38.69269837828735, 1.4781691427754278]
         },
         duration: '1 día',
-        owner: '5fcbc6afbee1e9784858e58c',
-        spots: [
-            {
-                name: 'El Pilar de La Mola',
-                description: 'El pueblo más alto de la isla. A lo largo del camino se pueden admirar las casas de campo con la arquitectura típica de la isla',
-                spotImage: 'https://img.balearity.com/locations/pilar-de-la-mola-formentera-main.jpg',
-                spotLocation: {
-                    type: 'Point',
-                    coordinates: [38.66864665975332, 1.5564766111110078]
-                }
-            },
-            {
-                name: 'Playa de Es Arenals',
-                description: 'Aprovechen el mar cristalino que distingue a este rincón del paraíso para darse un chapuzón en el mar.',
-                spotImage: 'https://www.visitformentera.com/_misc2/playas-formentera/arenals4.jpg',
-                spotLocation: {
-                    type: 'Point',
-                    coordinates: [38.66624954198312,  1.5105006981761322]
-                }
-            }
-        ],
+        owner: '',
+        spots: [],
         messages: [
             {
                 user: '5fcbc6afbee1e9784858e58c',
@@ -95,6 +59,55 @@ Itineraries
     })
     .catch(err => console.log('Hubo un error,', err))
 
+const spots = [
+    {
+        name: 'Torre de los clérigos',
+        description: 'La Iglesia de los Clérigos fue construida en el siglo XVIII y su visita es gratuita.',
+        image: 'https://catshostels.com/wp-content/uploads/2019/06/1.-Clerigos-tower-1024x589.jpg',
+        location: {
+            type: 'Point',
+            coordinates: [41.14585630268839, -8.613987774364723]
+        }
+    },
+    {
+        name: 'La catedral de la sé',
+        description: 'Ha sido declarado monumento nacional portugués y por eso debería ser uno de los lugares obligatorios que ver en Oporto.',
+        image: 'https://catshostels.com/wp-content/uploads/2019/06/4.-S%C3%A9-Cathedral-600x345.jpg',
+        location: {
+            type: 'Point',
+            coordinates: [41.14286198075304, -8.611115882104372]
+        }
+    },
+    {
+        name: 'El Pilar de La Mola',
+        description: 'El pueblo más alto de la isla. A lo largo del camino se pueden admirar las casas de campo con la arquitectura típica de la isla',
+        image: 'https://img.balearity.com/locations/pilar-de-la-mola-formentera-main.jpg',
+        location: {
+            type: 'Point',
+            coordinates: [38.66864665975332, 1.5564766111110078]
+        }
+    },
+    {
+        name: 'Playa de Es Arenals',
+        description: 'Aprovechen el mar cristalino que distingue a este rincón del paraíso para darse un chapuzón en el mar.',
+        image: 'https://www.visitformentera.com/_misc2/playas-formentera/arenals4.jpg',
+        location: {
+            type: 'Point',
+            coordinates: [38.66624954198312, 1.5105006981761322]
+        }
+    }
+]
+
+Spots
+    .create(spots)
+    .then(allSpotsCreated => {
+        console.log(`Created ${allSpotsCreated.length} spots`)
+        mongoose.connection.close()
+    })
+    .catch(err => console.log('Hubo un error,', err))
+
+
+
 const users = [
     {
         profileImage: '',
@@ -102,7 +115,7 @@ const users = [
         password: "isa",
         description: 'Lorem fksdfhsdhshaLJSLKDJFLKASJFLSJFLKJSAF',
         role: "USER",
-        itinerariesSaved:[]
+        itinerariesSaved: []
     }
 ]
 

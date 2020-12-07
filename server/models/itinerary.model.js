@@ -16,30 +16,6 @@ const messageSchema = new Schema({
     timestamps: true
 })
 
-const spotsSchema = new Schema({
-    description: {
-        type: String,
-        required: true,
-        default: 'Desconocido',
-        trim: true,
-    },
-    name: {
-        type: String // google nombre ejemplo: sol (autocomplete)
-    },
-    image: {
-        type: String,
-        trim: true
-    },
-    location: { 
-        type: {
-            type: String
-        },
-        coordinates: [Number]
-    }
-}, {
-    timestamps: true
-})
-
 const itinerariesSchema = new Schema({
     name: {
         type: String,
@@ -75,7 +51,10 @@ const itinerariesSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    spots: [spotsSchema],
+    spots: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Spots'
+    }],
     messages: [messageSchema],
     messagesAmount: {
         type: Number
