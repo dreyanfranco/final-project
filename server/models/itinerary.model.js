@@ -26,11 +26,11 @@ const spotsSchema = new Schema({
     name: {
         type: String // google nombre ejemplo: sol (autocomplete)
     },
-    spotImage: {
+    image: {
         type: String,
         trim: true
     },
-    spotLocation: {
+    location: { 
         type: {
             type: String
         },
@@ -76,7 +76,14 @@ const itinerariesSchema = new Schema({
         ref: 'User'
     },
     spots: [spotsSchema],
-    messages: [messageSchema]
+    messages: [messageSchema],
+    messagesAmount: {
+        type: Number
+    },
+    messagesSum: {
+        type: Number
+    }
+    
 }, {
     timestamps: true
 })

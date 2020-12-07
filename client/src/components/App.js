@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+import ItinerariesList from './pages/Itineraries-list/Itineraries-list'
+
 function App() {
   return (
-    <h1>HOLA</h1>
+    <ItinerariesList />
+    
   );
 }
 

@@ -19,10 +19,10 @@ const userSchema = new Schema({
         enum: ['ADMIN', 'USER'],
         default: 'USER'
     },
-    itineraries: [{
+    itinerariesSaved: [{
         type: Schema.Types.ObjectId,
         ref: 'Itineraries'
-    }],
+    }],// para guardar itinerarios de otros users
 }, {
     timestamps: true
 })

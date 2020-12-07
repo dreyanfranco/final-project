@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const Itineraries = require('../models/itineraries.model')
+const Itineraries = require('../models/itinerary.model')
 
 
 router.get('/getAllItineraries', (req, res) => {
@@ -67,7 +67,7 @@ router.post('/:id/new-spots', (req, res) => {
 // no funciona editar
 router.put('/:id/editSpot/:spot_id', (req, res) => {
     Itineraries
-        .findByIdAndUpdate(req.params.id, req.body)
+        .findByIdAndUpdate(req.params.id, {})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
