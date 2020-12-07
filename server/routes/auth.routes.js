@@ -29,6 +29,10 @@ router.delete('/deleteUser/:user_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get('/profile/save-itinerary/:itinerary_id', (req, res) => {
+
+})
+
 
 
 router.post('/signup', (req, res) => {

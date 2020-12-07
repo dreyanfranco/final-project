@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const Itineraries = require('../models/itineraries.model')
+const Itineraries = require('../models/itinerary.model')
 
 
 router.get('/getAllItineraries', (req, res) => {
