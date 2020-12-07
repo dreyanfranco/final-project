@@ -23,7 +23,7 @@ $ npm start
 | 5 | delete | api/itineraries/deleteItinerary | Eliminar itinerario  | Server |
 | 6 | post | api/itineraries/:id/message | Crea valoración y comentario | Server |
 | 7 | post | api/itineraries/:id/new-spots | Crea nuevo spot | Server |
-| ------ | ------ | ------ | ------ | ------ |
+|  |  |  |  |  |
 | 8 | post | api/auth/signup | Registro de usuario | Server |
 | 9 | post | api/auth/login | Iniciar sesión usuario o admin | Server |
 | 10 | get | api/auth/logout | Cierra sesión | Server |
