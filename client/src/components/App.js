@@ -37,11 +37,12 @@ class App extends Component {
     return (
       <>
         <Header storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
-        <ItinerariesList />
+       
         <main>
           <Switch>
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
+            <Route path="/itinerarios" exact render={()=><ItinerariesList/>}/>
 
           </Switch>
         </main>
