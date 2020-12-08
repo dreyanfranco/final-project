@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from './../../../service/auth.service'
+import FilesService from './../../../service/upload.service'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
@@ -8,26 +9,46 @@ class Signup extends Component {
     constructor() {
         super()
         this.state = {
-            profileImage:'',
-            username: '',
-            password: '',
-            description: '',
+            profile:{
+                profileImage:'',
+                username: '',
+                password: '',
+                description: ''
+            },
+            uploadingActive: false
         }
         this.authService = new AuthService()
-
+        this.filesService = new FilesService()
     }
-    handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
+    handleInputChange = e => this.setState({ profile: { ...this.state.profile, [e.target.name]: e.target.value }})
     handleSubmit = e => {
 
         e.preventDefault()
 
         this.authService
-            .signup(this.state)
+            .signup(this.state.profile)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
                 this.props.history.push('/perfil')        
             })
             .catch(err => console.log(err))
+    }
+        handleImageUpload = e => {
+
+        const uploadData = new FormData()
+            uploadData.append('profileImage', e.target.files[0])
+            
+        this.setState({ uploadingActive: true })
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+                this.setState({
+                    profile: { ...this.state.profile, profileImage: response.data.secure_url },
+                    uploadingActive: false
+                })
+            })
+            .catch(err => console.log('ERRORRR!', err))
     }
     render() {
         return (
@@ -47,7 +68,7 @@ class Signup extends Component {
                             </Form.Group>
                             <Form.Group controlId="profileImage">
                                 <Form.Label>Imagen </Form.Label>
-                                <Form.Control type="text" name="profileImage" value={this.state.profileImage} onChange={this.handleInputChange} />
+                                <Form.Control type="file" onChange={this.handleImageUpload} />
                             </Form.Group>
                              <Form.Group controlId="description">
                                 <Form.Label>Sobre ti: </Form.Label>
