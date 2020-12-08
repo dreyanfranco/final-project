@@ -62,7 +62,6 @@ router.post('/:id/newSpot', (req, res) => {
     
     Spots
         .create(req.body)
-        .then(theSpot => {return theSpot})
         .then(theSpot => Itineraries.findByIdAndUpdate(req.params.id, { $push: {spots: theSpot.id} }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
@@ -75,11 +74,11 @@ router.put('/editSpot/:spot_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// lo elimina de spot pero no de itinerarios
-router.delete('/deleteSpot/:spot_id', (req, res) => {
+
+router.delete('/:id/deleteSpot/:spot_id', (req, res) => {
     Spots
         .findByIdAndDelete(req.params.spot_id)
-        .then(Itineraries.findByIdAndUpdate(req.params.spot_id, { $pull: { spots: req.params.spot_id } }, { new: true }))
+        .then(() => Itineraries.findByIdAndUpdate(req.params.id, { $pull: { spots: req.params.spot_id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
