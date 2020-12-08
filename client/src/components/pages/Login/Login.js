@@ -9,12 +9,14 @@ class Login extends Component {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            errorMessage: '',
         }
         this.authService = new AuthService()
     }
 
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
+
 
     handleSubmit = e => {
         e.preventDefault()
@@ -25,8 +27,9 @@ class Login extends Component {
                 this.props.storeUser(theLoggedInUser.data)
                 this.props.history.push('/perfil')        
             })
-            .catch(err => console.log({ err }))
+            .catch(err => this.setState({ errorMessage: err.response.data.message }))
     }
+    
 
 
     render() {
@@ -49,9 +52,11 @@ class Login extends Component {
                                 <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                             </Form.Group>
                             <Button variant="dark" type="submit">Iniciar sesión</Button>
+                            <small>{this.state.errorMessage}</small>
                         </Form>
                     </Col>
                 </Row>
+                
             </Container>
         )
     }
