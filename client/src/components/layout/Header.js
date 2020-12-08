@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import logo from './logo.png'
+import avatar from './backpack.png'
 
 import AuthService from './../../service/auth.service'
 
@@ -52,7 +53,7 @@ class Header extends Component {
 
                         }
                         <Link to="/perfil">
-                            <Nav.Link as="div">Hola, {this.props.loggedUser ? this.props.loggedUser.username : 'invitado'}</Nav.Link>
+                            <Nav.Link as="div"> <img alt="profile" width="20" height="20" className="d-inline-block align-top avatar" src={this.props.loggedUser ? this.props.loggedUser.profileImage : `${avatar}`}/> {this.props.loggedUser ? this.props.loggedUser.username : 'Perfil'}</Nav.Link>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>
