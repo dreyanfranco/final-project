@@ -30,9 +30,14 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
 })
 
 router.post('/newItinerary', (req, res) => {
-
+    const { name, cityName, itineraryImage, description, duration, latitude, longitude } = req.body
+    const cityLocation = {
+        type: 'Point',
+        coordinates: [latitude, longitude]
+    }
+    
     Itineraries
-        .create(req.body)
+        .create({name, cityName, itineraryImage, description, duration, cityLocation, owner: req.user})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

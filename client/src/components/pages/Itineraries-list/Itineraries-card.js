@@ -2,7 +2,6 @@ import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const ItinerariesCard = ({ itinerary, loggedUser }) => {
-   
     return (
 
         <Col lg={4}>

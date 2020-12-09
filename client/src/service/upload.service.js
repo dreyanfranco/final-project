@@ -11,4 +11,6 @@ export default class FilesService {
     }
 
     uploadImage = imageForm => this.apiHandler.post('/uploadSignup', imageForm)
+    uploadImageItinerary = imageForm => this.apiHandler.post('/uploadItinerary', imageForm)
+    uploadImageSpot = imageForm => this.apiHandler.post('/uploadSpot', imageForm)
 }

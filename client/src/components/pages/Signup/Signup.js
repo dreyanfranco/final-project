@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import AuthService from './../../../service/auth.service'
-import FilesService from './../../../service/upload.service'
+import React, { Component } from "react"
+import AuthService from "./../../../service/auth.service"
+import FilesService from "./../../../service/upload.service"
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from "react-bootstrap"
 
 class Signup extends Component {
 
@@ -10,10 +10,10 @@ class Signup extends Component {
         super()
         this.state = {
             profile:{
-                profileImage:'',
-                username: '',
-                password: '',
-                description: ''
+                profileImage:"",
+                username: "",
+                password: "",
+                description: ""
             },
             uploadingActive: false
         }
@@ -21,6 +21,7 @@ class Signup extends Component {
         this.filesService = new FilesService()
     }
     handleInputChange = e => this.setState({ profile: { ...this.state.profile, [e.target.name]: e.target.value }})
+    
     handleSubmit = e => {
 
         e.preventDefault()
@@ -29,14 +30,14 @@ class Signup extends Component {
             .signup(this.state.profile)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.push('/perfil')        
+                this.props.history.push("/perfil")        
             })
             .catch(err => console.log(err))
     }
-        handleImageUpload = e => {
-
+    
+    handleImageUpload = e => {
         const uploadData = new FormData()
-            uploadData.append('profileImage', e.target.files[0])
+            uploadData.append("profileImage", e.target.files[0])
             
         this.setState({ uploadingActive: true })
 
@@ -48,8 +49,9 @@ class Signup extends Component {
                     uploadingActive: false
                 })
             })
-            .catch(err => console.log('ERRORRR!', err))
+            .catch(err => console.log("ERRORRR!", err))
     }
+    
     render() {
         return (
             <Container>
