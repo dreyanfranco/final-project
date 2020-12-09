@@ -25,6 +25,7 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
     Itineraries
         .findById(req.params.itinerary_id)
         .populate('owner')
+        .populate('spots')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

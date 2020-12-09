@@ -40,14 +40,14 @@ class App extends Component {
     return (
       <>
         <Header storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
-        
+
         <main>
           <Switch>
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
             <Route path="/perfil" render={() => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
-            <Route path="/itinerario/:itinerary_id" render={props => <ItineraryDetails {...props} /> } />
+            <Route path="/itinerario/:itinerary_id" render={props => <ItineraryDetails {...props} />} />
             <Route path="/crear-itinerario" render={() => <ItineraryForm />}></Route>
           </Switch>
         </main>
