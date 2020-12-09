@@ -11,6 +11,7 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import ItinerariesList from './pages/Itineraries-list/Itineraries-list'
 import Profile from './pages/Profile/profile'
+import ItineraryDetails from './pages/Itinerary-details/Itinerary-details'
 
 import AuthServices from './../service/auth.service'
 
@@ -44,7 +45,8 @@ class App extends Component {
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
             <Route path="/perfil" render={() => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
-            <Route path="/itinerarios" exact render={props => <ItinerariesList {...props}/>}/>
+            <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
+            <Route path="/itinerario/:itinerary_id" render={props => <ItineraryDetails {...props} /> } />
 
           </Switch>
         </main>
