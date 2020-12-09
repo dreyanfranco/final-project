@@ -13,4 +13,24 @@ router.post('/uploadSignup', uploader.single("profileImage"), (req, res) => {
     res.json({ secure_url: req.file.path });
 })
 
+router.post('/uploadItinerary', uploader.single("itineraryImage"), (req, res) => {
+
+    if (!req.file) {
+        res.status(500).json({ message: 'Error cargando la imagen' });
+        return;
+    }
+
+    res.json({ secure_url: req.file.path });
+})
+
+router.post('/uploadSpot', uploader.single("image"), (req, res) => {
+
+    if (!req.file) {
+        res.status(500).json({ message: 'Error cargando la imagen' });
+        return;
+    }
+
+    res.json({ secure_url: req.file.path });
+})
+
 module.exports = router;

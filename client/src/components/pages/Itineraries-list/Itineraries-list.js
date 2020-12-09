@@ -24,11 +24,17 @@ class ItinerariesList extends Component {
             <>
                 <Container>
                     <h1>Listado de itinerarios</h1>
-                    <Row>
-                        {this.state.itineraries.map(elm =>
-                            <ItinerariesCard key={elm._id} itinerary={elm} />
+
+                    {this.state.itineraries.length ?
+                        <Row>
+                            {this.state.itineraries.map(elm =>
+                                <ItinerariesCard key={elm._id} itinerary={elm} />
                             )}
-                    </Row>
+                        </Row>
+                        : <>
+
+                        </>
+                    }
                 </Container>
             </>
         )

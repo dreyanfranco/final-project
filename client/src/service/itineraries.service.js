@@ -11,7 +11,7 @@ export default class ItinerariesService {
 
     getAllItineraries = () => this.apiHandler.get('/getAllItineraries')
     getItinerary = itineraryId => this.apiHandler.get(`/getOneItinerary/${itineraryId}`)
-    newItinerary = itineraryInfo => this.apiHandler.post(`/newItinerary/${itineraryInfo}`)
+    newItinerary = itineraryInfo => this.apiHandler.post('/newItinerary', itineraryInfo)
     editSpot = (itineraryId, spotId) => this.apiHandler.put(`/${itineraryId}/editSpot/${spotId}`)
 
 }

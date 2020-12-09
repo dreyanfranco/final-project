@@ -24,6 +24,7 @@ const spotsSchema = new Schema({
 }, {
     timestamps: true
 })
+spotsSchema.index({ location: '2dsphere' })
 
 const Spots = mongoose.model("Spots", spotsSchema)
 module.exports = Spots

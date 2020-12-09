@@ -67,5 +67,7 @@ const itinerariesSchema = new Schema({
     timestamps: true
 })
 
+itinerariesSchema.index({ cityLocation: '2dsphere' })
+
 const Itineraries = mongoose.model("Itineraries", itinerariesSchema)
 module.exports = Itineraries

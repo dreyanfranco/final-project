@@ -2,7 +2,7 @@ import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
 
 const ItinerariesCard = ({ itinerary, loggedUser }) => {
-   
+   console.log(itinerary.owner)
     return (
 
         <Col lg={4}>
@@ -10,7 +10,7 @@ const ItinerariesCard = ({ itinerary, loggedUser }) => {
                 <Card.Img variant="top" src={itinerary.itineraryImage} />
                 <Card.Title>{itinerary.name}</Card.Title>
                 <Card.Body>
-                    <Card.Text>created by {itinerary.owner.username}</Card.Text>
+                    <Card.Text>created by {itinerary.owner.username }</Card.Text>
                     <Card.Text>{itinerary.duration} { itinerary._id }</Card.Text>
                     
                     <ButtonGroup aria-label="Basic example" style={{ width: '100%' }}>
