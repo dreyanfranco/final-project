@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <>
         <Header storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
-        
+
         <main>
           <Switch>
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
