@@ -65,11 +65,16 @@ router.post('/:id/message', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/:id/newSpot', (req, res) => {
-    
+router.post('/newSpot', (req, res) => {
+    console.log(req.body)
+    const { name, image, description, latitude, longitude } = req.body.spotInfo
+    const cityLocation = {
+        type: 'Point',
+        coordinates: [latitude, longitude]
+    }
     Spots
-        .create(req.body)
-        .then(theSpot => Itineraries.findByIdAndUpdate(req.params.id, { $push: {spots: theSpot.id} }, { new: true }))
+        .create({name, image, description, cityLocation})
+        .then(theSpot => Itineraries.findByIdAndUpdate(req.body.itineraryId, { $push: {spots: theSpot.id} }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
