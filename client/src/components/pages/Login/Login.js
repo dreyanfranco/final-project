@@ -30,8 +30,6 @@ class Login extends Component {
             .catch(err => this.setState({ errorMessage: err.response.data.message }))
     }
     
-
-
     render() {
 
         return (
@@ -39,6 +37,7 @@ class Login extends Component {
             <Container>
 
                 <Row>
+                    
                     <Col md={{ span: 6, offset: 3 }}>
                         <h1>Iniciar sesión</h1>
                         <hr />

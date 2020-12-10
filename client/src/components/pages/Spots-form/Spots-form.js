@@ -25,7 +25,10 @@ class SpotForm extends Component {
 
         this.itinerariesService
             .newSpot(this.props.match.params.itinerary_id ,this.state)
-            .then(res => console.log(res))
+            .then(res => {
+                this.props.closeModal()
+                this.props.updateList()
+            })
             .catch(err => console.log(err))
     }
 
@@ -53,7 +56,6 @@ class SpotForm extends Component {
                 <Row>
                     <Col md={{ span: 6, offset: 3 }}>
                         <h1>Añadir Spot</h1>
-                        {console.log(this.state)}
                         <hr />
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="name">

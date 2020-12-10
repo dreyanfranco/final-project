@@ -36,7 +36,6 @@ router.post('/newItinerary', (req, res) => {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
-    
     Itineraries
         .create({name, cityName, itineraryImage, description, duration, cityLocation, owner: req.user})
         .then(response => res.json(response))

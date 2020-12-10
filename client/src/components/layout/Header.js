@@ -9,6 +9,9 @@ import AuthService from './../../service/auth.service'
 class Header extends Component {
     constructor() {
         super()
+        this.state = {
+            showModal: false
+        }
         this.authService = new AuthService()
     }
     logOut = () => {
@@ -17,11 +20,11 @@ class Header extends Component {
             .then(res => this.props.storeUser(undefined))
             .catch(err => console.log(err))
     }
-
+    handleModal = visible => this.setState({ showModal: visible })
     render() {
-        
+
         return (
-           <Navbar bg="light"  expand="md" style={{ marginBottom: '50px' }}>
+            <Navbar bg="light" expand="md" style={{ marginBottom: '50px' }}>
                 <Link to="/">
                     <Navbar.Brand>
                         <img alt="Logotipo" src={logo} width="30" height="30" className="d-inline-block align-top" />
@@ -50,10 +53,9 @@ class Header extends Component {
                                         <Nav.Link as="div">Inicio sesión</Nav.Link>
                                     </Link>
                                 </>
-
                         }
                         <Link to="/perfil">
-                            <Nav.Link as="div"> <img alt="profile" width="20" height="20" className="d-inline-block align-top avatar" src={this.props.loggedUser ? this.props.loggedUser.profileImage : `${avatar}`}/> {this.props.loggedUser ? this.props.loggedUser.username : 'Perfil'}</Nav.Link>
+                            <Nav.Link as="div"> <img alt="profile" width="20" height="20" className="d-inline-block align-top avatar" src={this.props.loggedUser ? this.props.loggedUser.profileImage : `${avatar}`} /> {this.props.loggedUser ? this.props.loggedUser.username : 'Perfil'}</Nav.Link>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>

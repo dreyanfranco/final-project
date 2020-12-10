@@ -70,7 +70,7 @@ class ItineraryForm extends Component {
                                 <Form.Label size="sm">Latitud</Form.Label>
                                 <Form.Control type="text" name="latitude" value={this.state.latitude} onChange={this.handleInputChange} />
                                 <Form.Label size="sm">Longitud</Form.Label>
-                                <Form.Control type="text" name="longitude" value={this.state.longitude} onChange={this.handleInputChange} />
+                                <Form.Control type="text" name="longitude" value={this.state.longi} onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group controlId="duration">
                                 <Form.Label>Duración de viaje</Form.Label>
