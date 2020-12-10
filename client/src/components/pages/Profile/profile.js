@@ -28,9 +28,9 @@ class Profile extends Component {
     
     render() {
 
-        this.filteredItineraries = this.state.itineraries.filter(myItineraries => myItineraries.owner.username === this.props.loggedUser.username)
-        this.filterSaved = this.props.loggedUser.itinerariesSaved.filter(itineraryId => itineraryId === this.state.itineraries._id)
-    
+        this.filteredItineraries = this.state.itineraries.filter(elm => elm.owner.username === this.props.loggedUser.username)
+        this.filterSaved = this.state.itineraries.filter(elm => this.props.loggedUser.itinerariesSaved.includes(elm._id))
+
     return (
         <Container>
             <Row className="align-items-center">
@@ -57,7 +57,7 @@ class Profile extends Component {
                       
                 {this.filterSaved.map(elm =>
                                 <ItinerariesCard key={elm._id} itinerary={elm} />
-                            )}
+                            )} 
                
             </Row>
         </Container>

@@ -9,7 +9,7 @@ const ItinerariesCard = ({ itinerary, loggedUser }) => {
                 <Card.Img variant="top" src={itinerary.itineraryImage} />
                 <Card.Title>{itinerary.name}</Card.Title>
                 <Card.Body>
-                    <Card.Text>created by {itinerary.owner.username}</Card.Text>
+                    <Card.Text>creado por {itinerary.owner.username}</Card.Text>
                     <Card.Text>{itinerary.duration} </Card.Text>
                     {
                         itinerary.owner === loggedUser

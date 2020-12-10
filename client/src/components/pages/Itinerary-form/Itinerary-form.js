@@ -22,7 +22,7 @@ class ItineraryForm extends Component {
         e.preventDefault()
         this.itinerariesService
             .newItinerary(this.state)
-            .then(res => console.log(res))
+            .then(res => this.props.history.push(`/itinerario/${res.data._id}`)  )
             .catch(err => console.log(err))
     }
     handleImageUpload = e => {

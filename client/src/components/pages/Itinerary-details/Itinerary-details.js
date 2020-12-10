@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+
 import ItinerariesService from './../../../service/itineraries.service';
+import AuthService from '../../../service/auth.service'
+
 import Loader from './../../shared/Spinner/Loader'
 import './Itinerary-details.css'
 import MapContainer from './../Itinerary-map/Itinerary-map'
@@ -22,6 +25,7 @@ class ItineraryDetails extends Component {
             showModal: false
         }
         this.itinerariesService = new ItinerariesService();
+        this.authService = new AuthService()
     }
 
     componentDidMount = () => this.refreshItineraries()
@@ -32,6 +36,14 @@ class ItineraryDetails extends Component {
         this.itinerariesService
             .getItinerary(itinerary_id)
             .then(res => this.setState({ itinerary: res.data }))
+            .catch(err => console.log(err))
+    }
+    saveItinerary = () => {
+
+        const itinerary_id = this.props.match.params.itinerary_id
+        this.authService
+            .saveItinerary(itinerary_id )
+            .then(() => this.props.history.push('/perfil')  )
             .catch(err => console.log(err))
     }
 
@@ -60,7 +72,14 @@ class ItineraryDetails extends Component {
 
                                 <Col>
                                     <p>{this.state.itinerary.description}</p>
-                                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
+                                    {
+                                        this.state.itinerary.owner.username === this.props.loggedUser.username
+                                            ?
+                                            <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
+                                            :
+                                            <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
+                                            
+                                    }
                                 </Col>
                             </Row>
                         </section>
