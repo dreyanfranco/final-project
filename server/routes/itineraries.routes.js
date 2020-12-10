@@ -67,7 +67,6 @@ router.post('/:id/message', (req, res) => {
 })
 
 router.post('/newSpot', (req, res) => {
-    console.log(req.body)
     const { name, image, description, latitude, longitude } = req.body.spotInfo
     const cityLocation = {
         type: 'Point',

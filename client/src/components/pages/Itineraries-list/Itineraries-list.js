@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import ItinerariesService from './../../../service/itineraries.service';
+
 import ItinerariesCard from './Itineraries-card';
+
 
 class ItinerariesList extends Component {
     constructor() {
@@ -10,6 +12,7 @@ class ItinerariesList extends Component {
             itineraries: []
         }
         this.itinerariesService = new ItinerariesService();
+        
     }
 
     componentDidMount = () => {
@@ -18,6 +21,7 @@ class ItinerariesList extends Component {
             .then(res => this.setState({ itineraries: res.data }))
             .catch(err => console.log(err));
     }
+   
 
     render() {
         return (

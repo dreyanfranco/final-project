@@ -10,7 +10,7 @@ import Header from './layout/Header'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import ItinerariesList from './pages/Itineraries-list/Itineraries-list'
-import Profile from './pages/Profile/profile'
+import Profile from './pages/Profile/Profile'
 import ItineraryDetails from './pages/Itinerary-details/Itinerary-details'
 import ItineraryForm from './pages/Itinerary-form/Itinerary-form'
 import SpotsForm from './pages/Spots-form/Spots-form'
@@ -46,7 +46,7 @@ class App extends Component {
           <Switch>
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
-            <Route path="/perfil" render={() => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
+            <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
             <Route path="/itinerario/:itinerary_id" render={props => <ItineraryDetails {...props} /> } />
             <Route path="/crear-itinerario" render={() => <ItineraryForm />} />

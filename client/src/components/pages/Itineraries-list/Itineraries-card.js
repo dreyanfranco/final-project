@@ -18,9 +18,13 @@ const ItinerariesCard = ({ itinerary, loggedUser }) => {
                         <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Editar</Link> 
                         <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Eliminar</Link> 
                         <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
+                        
                     </ButtonGroup>
                         :
-                   <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
+
+                            <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
+                            
+                            
                     }
                 </Card.Body>
             </Card>

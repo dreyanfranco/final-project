@@ -2,11 +2,9 @@ import React, { Component } from "react"
 import FilesService from "./../../../service/upload.service"
 import ItinerariesService from "./../../../service/itineraries.service"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
-
 class ItineraryForm extends Component {
     constructor() {
         super()
-
         this.state = {
             name: "",
             cityName: "", // google maps autocomplete
@@ -14,29 +12,23 @@ class ItineraryForm extends Component {
             itineraryImage: "",
             latitude: "",
             longitude: "",
-            duration: "",
+            duration: "1 día",
         }
         this.itinerariesService = new ItinerariesService()
         this.filesService = new FilesService()
     }
-
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
-
     handleSubmit = e => {
         e.preventDefault()
-
         this.itinerariesService
             .newItinerary(this.state)
             .then(res => console.log(res))
             .catch(err => console.log(err))
     }
-
     handleImageUpload = e => {
         const uploadData = new FormData()
         uploadData.append("itineraryImage", e.target.files[0])
-
         this.setState({ uploadingActive: true })
-
         this.filesService
             .uploadImageItinerary(uploadData)
             .then(response => {
@@ -47,8 +39,6 @@ class ItineraryForm extends Component {
             })
             .catch(err => console.log("ERRORRR!", err))
     }
-
-
     render() {
         return (
             <Container>
@@ -102,5 +92,4 @@ class ItineraryForm extends Component {
         )
     }
 }
-
 export default ItineraryForm
