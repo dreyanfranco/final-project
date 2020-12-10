@@ -1,4 +1,4 @@
-import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
+import { Col, Card, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const SpotsCard = ({ spot }) => {

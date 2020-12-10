@@ -3,12 +3,13 @@ import ItinerariesService from './../../../service/itineraries.service';
 import Loader from './../../shared/Spinner/Loader'
 import './Itinerary-details.css'
 import MapContainer from './../Itinerary-map/Itinerary-map'
-
+import SpotForm from './../Spots-form/Spots-form'
+import MessageForm from './Message-form'
 
 import SpotsCard from './Spots-card'
 
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
@@ -17,12 +18,14 @@ class ItineraryDetails extends Component {
     constructor() {
         super()
         this.state = {
-            itinerary: undefined
-
+            itinerary: undefined,
+            showModal: false
         }
         this.itinerariesService = new ItinerariesService();
     }
-    componentDidMount = () => {
+
+    componentDidMount = () => this.refreshItineraries()
+    refreshItineraries = () => {
 
         const itinerary_id = this.props.match.params.itinerary_id
 
@@ -31,6 +34,8 @@ class ItineraryDetails extends Component {
             .then(res => this.setState({ itinerary: res.data }))
             .catch(err => console.log(err))
     }
+
+    handleModal = visible => this.setState({ showModal: visible })
 
     render() {
 
@@ -54,18 +59,16 @@ class ItineraryDetails extends Component {
                                 </Col>
 
                                 <Col>
-                                    {this.state.itinerary.description}
+                                    <p>{this.state.itinerary.description}</p>
+                                    <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
                                 </Col>
                             </Row>
                         </section>
                         <section className="spots-list">
                             <h3>Listado de Spots</h3>
                             <Row>
-
                                 {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} />
                                 )}
-
-
                             </Row>
                         </section>
                         <section className="about-owner">
@@ -87,6 +90,7 @@ class ItineraryDetails extends Component {
                             <Row>
                                 <Col>
                                     <h3>Comentarios:</h3>
+                                    <MessageForm />
                                     <ul>
                                         {this.state.itinerary.messages.map(elm =>
                                             <li key={elm._id}>{elm.text} </li>
@@ -99,10 +103,7 @@ class ItineraryDetails extends Component {
                             <Row>
                                 <Col>
                                     <h3>Mapa</h3>
-                                    <MapContainer
-                                        location={this.state.itinerary.cityLocation.coordinates}
-
-                                    />
+                                    <MapContainer location={this.state.itinerary.cityLocation.coordinates} />
                                 </Col>
                             </Row>
                         </section>
@@ -110,6 +111,12 @@ class ItineraryDetails extends Component {
                     :
                     <Loader />
                 }
+                <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
+                    <Modal.Body>
+                        <SpotForm closeModal={() => this.handleModal(false)} updateList={this.refreshItineraries} {...this.props} />
+                    </Modal.Body>
+
+                </Modal>
 
             </Container>
         )
