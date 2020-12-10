@@ -26,7 +26,11 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
         .findById(req.params.itinerary_id)
         .populate('owner')
         .populate('spots')
-        .then(response => res.json(response))
+        .populate('messages.user')
+        .then(response => {
+            console.log(response)
+            res.json(response)
+        })
         .catch(err => res.status(500).json(err))
 })
 
@@ -37,7 +41,7 @@ router.post('/newItinerary', (req, res) => {
         coordinates: [latitude, longitude]
     }
     Itineraries
-        .create({name, cityName, itineraryImage, description, duration, cityLocation, owner: req.user})
+        .create({ name, cityName, itineraryImage, description, duration, cityLocation, owner: req.user })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -59,8 +63,11 @@ router.delete('/deleteItinerary/:itinerary_id', (req, res) => {
 })
 
 router.post('/:id/message', (req, res) => {
+    const { user, text, rating } = req.body.message
+    
     Itineraries
-        .findByIdAndUpdate(req.params.id, { $push: { messages: req.body } }, { new: true })
+        .findByIdAndUpdate(req.params.id, { $push: { messages: { user, text, rating } } }, { new: true })
+        .populate('user')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -72,8 +79,8 @@ router.post('/newSpot', (req, res) => {
         coordinates: [latitude, longitude]
     }
     Spots
-        .create({name, image, description, cityLocation})
-        .then(theSpot => Itineraries.findByIdAndUpdate(req.body.itineraryId, { $push: {spots: theSpot.id} }, { new: true }))
+        .create({ name, image, description, cityLocation })
+        .then(theSpot => Itineraries.findByIdAndUpdate(req.body.itineraryId, { $push: { spots: theSpot.id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

@@ -5,7 +5,7 @@ import './Itinerary-details.css'
 import MapContainer from './../Itinerary-map/Itinerary-map'
 import SpotForm from './../Spots-form/Spots-form'
 import MessageForm from './Message-form'
-
+import MessageCard from './Message-card'
 import SpotsCard from './Spots-card'
 
 
@@ -90,10 +90,10 @@ class ItineraryDetails extends Component {
                             <Row>
                                 <Col>
                                     <h3>Comentarios:</h3>
-                                    <MessageForm />
+                                    <MessageForm {...this.props}/>
                                     <ul>
                                         {this.state.itinerary.messages.map(elm =>
-                                            <li key={elm._id}>{elm.text} </li>
+                                            <MessageCard key={elm._id} message={elm} />
                                         )}
                                     </ul>
                                 </Col>

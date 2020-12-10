@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import "./Profile.css"
 import { Link } from 'react-router-dom'
-import ItinerariesService from './../../../service/itineraries.service';
-import AuthServices from './../../../service/auth.service'
-import ItinerariesCard from './../../pages/Itineraries-list/Itineraries-card'
+import ItinerariesService from '../../../service/itineraries.service';
+import AuthServices from '../../../service/auth.service'
+import ItinerariesCard from '../Itineraries-list/Itineraries-card'
 
 class Profile extends Component {
     constructor(props) {

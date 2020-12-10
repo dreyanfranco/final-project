@@ -48,7 +48,7 @@ class App extends Component {
             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
-            <Route path="/itinerario/:itinerary_id" render={props => <ItineraryDetails {...props} /> } />
+            <Route path="/itinerario/:itinerary_id" render={props => <ItineraryDetails loggedUser={this.state.loggedInUser} {...props} /> } />
             <Route path="/crear-itinerario" render={() => <ItineraryForm />} />
             <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} /> } />
           </Switch>

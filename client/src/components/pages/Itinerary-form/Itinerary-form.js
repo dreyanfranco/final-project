@@ -45,7 +45,6 @@ class ItineraryForm extends Component {
                 <Row>
                     <Col md={{ span: 6, offset: 3 }}>
                         <h1>Crea tu itinerario</h1>
-                        {console.log(this.state)}
                         <hr />
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="name">
