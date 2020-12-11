@@ -74,12 +74,12 @@ router.post('/:id/message', (req, res) => {
 
 router.post('/newSpot', (req, res) => {
     const { name, image, description, latitude, longitude } = req.body.spotInfo
-    const cityLocation = {
+    const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
     Spots
-        .create({ name, image, description, cityLocation })
+        .create({ name, image, description, location })
         .then(theSpot => Itineraries.findByIdAndUpdate(req.body.itineraryId, { $push: { spots: theSpot.id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))

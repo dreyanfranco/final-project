@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const SpotsCard = ({ spot }) => {
     return (
-        <Col lg={{span:4}}>
+        <>
             <Card>
                 <Card.Img variant="top" src={spot.image} />
                 <Card.Title>{spot.name}</Card.Title>
@@ -17,7 +17,7 @@ const SpotsCard = ({ spot }) => {
 
                 </Card.Body>
             </Card>
-        </Col>
+        </>
     )
 }
 

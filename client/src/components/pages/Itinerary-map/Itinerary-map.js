@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { Popover, OverlayTrigger,Button } from 'react-bootstrap'
+import './Itinerary-map.css'
+
+
+import Marker from './Marker'
+
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -20,14 +26,35 @@ class SimpleMap extends Component {
     };
 
     render() {
+        const handleApiLoaded = (map, maps) => {
+        // use map and maps objects
+        }
+
+        console.log(this.props.spots)
         return (
             // Important! Always set the container height explicitly
-            <div style={{ height: '400px', width: '100%' }}>
+            <div style={{ height: '600px', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyCxQfr-VaQqyOGCylf9PbMafybyjxJzVIU' }}
                     defaultCenter={this.props.location && this.props.location}
                     defaultZoom={this.props.zoom}
+                    yesIWantToUseGoogleMapApiInternals
+                    onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
+
+                    {this.props.spots.map((elm, idx) =>
+                        <Marker
+                            key={idx}
+                            lat={elm.location.coordinates[0]}
+                            lng={elm.location.coordinates[1]}
+                            text={elm.name}
+                            description={elm.description}
+                            img={elm.image}
+                        />
+           
+                       
+                        
+                    )}    
                     {/* <AnyReactComponent
                         lat={this.props.location[0]}
                         lng={this.props.location[1]}
