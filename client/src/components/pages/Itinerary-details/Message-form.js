@@ -11,17 +11,17 @@ class MessageForm extends Component {
             user: this.props.loggedUser
         }
         this.itinerariesService = new ItinerariesService()
-        console.log(this.props.loggedUser)
     }
 
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log("probando")
         this.itinerariesService
             .newMessage(this.props.match.params.itinerary_id, this.state)
-            .then(res => console.log(res))
+            .then(res => {
+                this.props.updateList()
+            })
             .catch(err => console.log(err))
     }
 

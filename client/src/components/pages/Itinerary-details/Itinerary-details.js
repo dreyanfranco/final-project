@@ -14,7 +14,6 @@ import SpotsCard from './Spots-card'
 
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 
-import { Link } from 'react-router-dom'
 
 class ItineraryDetails extends Component {
 
@@ -42,8 +41,8 @@ class ItineraryDetails extends Component {
 
         const itinerary_id = this.props.match.params.itinerary_id
         this.authService
-            .saveItinerary(itinerary_id )
-            .then(() => this.props.history.push('/perfil')  )
+            .saveItinerary(itinerary_id)
+            .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
 
@@ -78,7 +77,7 @@ class ItineraryDetails extends Component {
                                             <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
                                             :
                                             <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
-                                            
+
                                     }
                                 </Col>
                             </Row>
@@ -109,10 +108,10 @@ class ItineraryDetails extends Component {
                             <Row>
                                 <Col>
                                     <h3>Comentarios:</h3>
-                                    <MessageForm {...this.props}/>
+                                    <MessageForm {...this.props} />
                                     <ul>
                                         {this.state.itinerary.messages.map(elm =>
-                                            <MessageCard key={elm._id} message={elm} />
+                                            <MessageCard key={elm._id} message={elm} updateList={this.refreshItineraries} />
                                         )}
                                     </ul>
                                 </Col>
