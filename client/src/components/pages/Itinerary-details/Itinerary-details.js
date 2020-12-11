@@ -68,10 +68,6 @@ class ItineraryDetails extends Component {
                                     <p>{this.state.itinerary.owner.username}</p>
                                     <p>Duración: {this.state.itinerary.duration}</p>
                                     <p>Rating: {this.state.itinerary.messages.rating}</p>
-                                </Col>
-
-                                <Col>
-                                    <p>{this.state.itinerary.description}</p>
                                     {
                                         this.state.itinerary.owner.username === this.props.loggedUser.username
                                             ?
@@ -81,15 +77,26 @@ class ItineraryDetails extends Component {
                                             
                                     }
                                 </Col>
+
+                                <Col>
+                                    <p className="description">{this.state.itinerary.description}</p>
+                                  
+                                </Col>
                             </Row>
                         </section>
                         <section className="spots-list">
                             <h3>Listado de Spots</h3>
                             <Row>
+                                <Col md= {{ span: 5 }}>
                                 {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} />
                                 )}
+                                </Col>
+                                <Col md={{ span: 7 }}>
+                                    <MapContainer location={this.state.itinerary.cityLocation.coordinates} spots={this.state.itinerary.spots} />
+                                </Col>
                             </Row>
                         </section>
+                      
                         <section className="about-owner">
                             <Row>
                                 <hr />
@@ -118,14 +125,7 @@ class ItineraryDetails extends Component {
                                 </Col>
                             </Row>
                         </section>
-                        <section className="comments">
-                            <Row>
-                                <Col>
-                                    <h3>Mapa</h3>
-                                    <MapContainer location={this.state.itinerary.cityLocation.coordinates} />
-                                </Col>
-                            </Row>
-                        </section>
+
                     </>
                     :
                     <Loader />
