@@ -46,10 +46,15 @@ router.post('/newItinerary', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/editItinerary/:itinerary_id', (req, res) => {
-
+router.put('/editItinerary', (req, res) => {
+    const { name, cityName, itineraryImage, description, duration, latitude, longitude } = req.body.editedItinerary 
+    const cityLocation = {
+        type: 'Point',
+        coordinates: [latitude, longitude]
+    }
+    console.log(req.body.itineraryId)
     Itineraries
-        .findByIdAndUpdate(req.params.itinerary_id, req.body)
+        .findByIdAndUpdate(req.body.itineraryId, { name, cityName, itineraryImage, description, duration, cityLocation, owner: req.user })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

@@ -13,7 +13,9 @@ import ItinerariesList from './pages/Itineraries-list/Itineraries-list'
 import Profile from './pages/Profile/Profile'
 import ItineraryDetails from './pages/Itinerary-details/Itinerary-details'
 import ItineraryForm from './pages/Itinerary-form/Itinerary-form'
+import EditItinerary from './pages/Edit-itinerary/Edit-itinerary'
 import SpotsForm from './pages/Spots-form/Spots-form'
+import EditSpot from './pages/Edit-spots/Edit-spots'
 
 import AuthServices from './../service/auth.service'
 
@@ -49,8 +51,10 @@ class App extends Component {
             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
             <Route path="/itinerario/:itinerary_id" render={props => this.state.loggedInUser ? <ItineraryDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
-            <Route path="/crear-itinerario" render={props=> <ItineraryForm {...props} /> } />
-            <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} /> } />
+            <Route path="/crear-itinerario" render={props => <ItineraryForm {...props} />} />
+            <Route path="/editar-itinerario/:itinerary_id" render={props => <EditItinerary {...props} /> } />
+            <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} />} />
+            <Route path="/editar-spot/:spot_id" render={props => <EditSpot {...props} /> } />
           </Switch>
         </main>
       </>
