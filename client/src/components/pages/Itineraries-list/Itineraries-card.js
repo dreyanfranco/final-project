@@ -1,9 +1,9 @@
-import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
+import { Col, Card, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const ItinerariesCard = ({ itinerary, loggedUser }) => {
     return (
-
+        
         <Col lg={4}>
             <Card>
                 <Card.Img variant="top" src={itinerary.itineraryImage} />
@@ -14,12 +14,11 @@ const ItinerariesCard = ({ itinerary, loggedUser }) => {
                     {
                         itinerary.owner === loggedUser
                         ?  
-                    <ButtonGroup aria-label="Basic example" style={{ width: '100%' }}>
+                    {/* <ButtonGroup aria-label="Basic example" style={{ width: '100%' }}>
                         <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Editar</Link> 
                         <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Eliminar</Link> 
                         <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
-                        
-                    </ButtonGroup>
+                    </ButtonGroup> */}
                         :
 
                             <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>

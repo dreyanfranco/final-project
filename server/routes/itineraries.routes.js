@@ -35,15 +35,11 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
 })
 
 router.post('/newItinerary', (req, res) => {
-    const { name, cityName, itineraryImage, description, duration, latitude, longitude } = req.body
-    const cityLocation = {
-        type: 'Point',
-        coordinates: [latitude, longitude]
-    }
+
     Itineraries
-        .create({ name, cityName, itineraryImage, description, duration, cityLocation, owner: req.user })
+        .create(req.body.itinerary)
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => console.log(err))
 })
 
 router.put('/editItinerary/:itinerary_id', (req, res) => {
@@ -64,7 +60,7 @@ router.delete('/deleteItinerary/:itinerary_id', (req, res) => {
 
 router.post('/:id/message', (req, res) => {
     const { user, text, rating } = req.body.message
-    
+
     Itineraries
         .findByIdAndUpdate(req.params.id, { $push: { messages: { user, text, rating } } }, { new: true })
         .populate('user')
@@ -73,19 +69,16 @@ router.post('/:id/message', (req, res) => {
 })
 
 router.post('/newSpot', (req, res) => {
-    const { name, image, description, latitude, longitude } = req.body.spotInfo
-    const location = {
-        type: 'Point',
-        coordinates: [latitude, longitude]
-    }
+
     Spots
-        .create({ name, image, description, location })
+        .create(req.body.spotInfo)
         .then(theSpot => Itineraries.findByIdAndUpdate(req.body.itineraryId, { $push: { spots: theSpot.id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
 router.put('/editSpot/:spot_id', (req, res) => {
+
     Spots
         .findByIdAndUpdate(req.params.spot_id, req.body)
         .then(response => res.json(response))
@@ -94,6 +87,7 @@ router.put('/editSpot/:spot_id', (req, res) => {
 
 
 router.delete('/:id/deleteSpot/:spot_id', (req, res) => {
+    
     Spots
         .findByIdAndDelete(req.params.spot_id)
         .then(() => Itineraries.findByIdAndUpdate(req.params.id, { $pull: { spots: req.params.spot_id } }, { new: true }))

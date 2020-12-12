@@ -11,9 +11,7 @@ import MessageForm from './Message-form'
 import MessageCard from './Message-card'
 import SpotsCard from './Spots-card'
 
-
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
-
 
 class ItineraryDetails extends Component {
 
@@ -28,6 +26,7 @@ class ItineraryDetails extends Component {
     }
 
     componentDidMount = () => this.refreshItineraries()
+
     refreshItineraries = () => {
 
         const itinerary_id = this.props.match.params.itinerary_id
@@ -63,7 +62,7 @@ class ItineraryDetails extends Component {
                                 </Col>
                                 <Col md={{ span: 6 }} >
                                     <h1>{this.state.itinerary.name}</h1>
-                                    <p>{this.state.itinerary.cityName}</p>
+                                    <p>{this.state.itinerary.location.address}</p>
                                     <p>{this.state.itinerary.owner.username}</p>
                                     <p>Duración: {this.state.itinerary.duration}</p>
                                     <p>Rating: {this.state.itinerary.messages.rating}</p>
@@ -75,27 +74,34 @@ class ItineraryDetails extends Component {
                                             <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
 
                                     }
+                                    {
+                                        this.props.loggedUser.itinerariesSaved.includes(this.state.itinerary._id)
+                                            ?
+                                            <Button onClick={this.saveItinerary} variant="dark" size="sm">Eliminar de favoritos</Button>
+                                            :
+                                            null
+                                    }
                                 </Col>
 
                                 <Col>
                                     <p className="description">{this.state.itinerary.description}</p>
-                                  
+
                                 </Col>
                             </Row>
                         </section>
                         <section className="spots-list">
                             <h3>Listado de Spots</h3>
                             <Row>
-                                <Col md= {{ span: 5 }}>
-                                {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} />
-                                )}
+                                <Col md={{ span: 5 }}>
+                                    {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} />
+                                    )}
                                 </Col>
                                 <Col md={{ span: 7 }}>
-                                    <MapContainer location={this.state.itinerary.cityLocation.coordinates} spots={this.state.itinerary.spots} />
+                                    <MapContainer location={this.state.itinerary.location.coordinates} spots={this.state.itinerary.spots} />
                                 </Col>
                             </Row>
                         </section>
-                      
+
                         <section className="about-owner">
                             <Row>
                                 <hr />
@@ -115,10 +121,10 @@ class ItineraryDetails extends Component {
                             <Row>
                                 <Col>
                                     <h3>Comentarios:</h3>
-                                    <MessageForm {...this.props} />
+                                    <MessageForm {...this.props} updateMessage={this.refreshItineraries} />
                                     <ul>
                                         {this.state.itinerary.messages.map(elm =>
-                                            <MessageCard key={elm._id} message={elm} updateList={this.refreshItineraries} />
+                                            <MessageCard key={elm._id} message={elm} />
                                         )}
                                     </ul>
                                 </Col>

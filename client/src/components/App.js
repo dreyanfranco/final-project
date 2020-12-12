@@ -15,6 +15,7 @@ import ItineraryDetails from './pages/Itinerary-details/Itinerary-details'
 import ItineraryForm from './pages/Itinerary-form/Itinerary-form'
 import SpotsForm from './pages/Spots-form/Spots-form'
 
+
 import AuthServices from './../service/auth.service'
 
 class App extends Component {
@@ -41,7 +42,7 @@ class App extends Component {
     return (
       <>
         <Header storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
-        
+
         <main>
           <Switch>
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
@@ -49,8 +50,8 @@ class App extends Component {
             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
             <Route path="/itinerario/:itinerary_id" render={props => this.state.loggedInUser ? <ItineraryDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
-            <Route path="/crear-itinerario" render={props=> <ItineraryForm {...props} /> } />
-            <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} /> } />
+            <Route path="/crear-itinerario" render={props => this.state.loggedInUser ? <ItineraryForm loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
+            <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} />} />
           </Switch>
         </main>
       </>

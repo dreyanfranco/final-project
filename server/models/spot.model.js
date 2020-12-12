@@ -8,9 +8,6 @@ const spotsSchema = new Schema({
         default: 'Desconocido',
         trim: true,
     },
-    name: {
-        type: String // google nombre ejemplo: sol (autocomplete)
-    },
     image: {
         type: String,
         trim: true
@@ -19,6 +16,7 @@ const spotsSchema = new Schema({
         type: {
             type: String
         },
+        address: String,
         coordinates: [Number]
     }
 }, {

@@ -11,7 +11,6 @@ class Profile extends Component {
         super(props)
         this.state = {
             itineraries: [],
-            
         }
         this.itinerariesService = new ItinerariesService();
         this.authServices = new AuthServices
@@ -25,46 +24,47 @@ class Profile extends Component {
     }
     filteredItineraries
     filterSaved
-    
+
     render() {
 
         this.filteredItineraries = this.state.itineraries.filter(elm => elm.owner.username === this.props.loggedUser.username)
         this.filterSaved = this.state.itineraries.filter(elm => this.props.loggedUser.itinerariesSaved.includes(elm._id))
 
-    return (
-        <Container>
-            <Row className="align-items-center">
-                <Col md={{span:7}}>
-                    <h1>¡Bienvenid@, {this.props.loggedUser.username} !</h1>
-                    <h4>Sobre mi:</h4>
-                    <p>{this.props.loggedUser.description} </p>
-                    <Link className="btn btn-dark btn-sm" to={`/crear-itinerario`}>Crear Itinerario</Link>
-                </Col>
-                <Col md={{ span: 5 }}>
-                    <img className="profile" src={this.props.loggedUser.profileImage} alt={this.props.loggedUser.username}/>
-                </Col>
-            </Row> 
-            <hr />
-            <Row className="align-items-center">
-                      
-                {this.filteredItineraries.map(elm =>
-                                <ItinerariesCard key={elm._id} itinerary={elm} />
-                            )}
-               
-            </Row>    
-            <hr />
-            <Row className="align-items-center">
-                      
-                {this.filterSaved.map(elm =>
-                                <ItinerariesCard key={elm._id} itinerary={elm} />
-                            )} 
-               
-            </Row>
-        </Container>
-    )
+        return (
+            <Container>
+                <Row className="align-items-center">
+                    <Col md={{ span: 7 }}>
+                        <h1>¡Bienvenid@, {this.props.loggedUser.username} !</h1>
+                        <h4>Sobre mi:</h4>
+                        <p>{this.props.loggedUser.description} </p>
+                        <Link className="btn btn-dark btn-sm" to={`/crear-itinerario`}>Crear Itinerario</Link>
+                    </Col>
+                    <Col md={{ span: 5 }}>
+                        <img className="profile" src={this.props.loggedUser.profileImage} alt={this.props.loggedUser.username} />
+                    </Col>
+                </Row>
+                <hr />
+                <Row className="align-items-center">
+
+                    {this.filteredItineraries.map(elm =>
+                        <ItinerariesCard key={elm._id} itinerary={elm} />
+                    )}
+
+                </Row>
+                <hr />
+                <Row className="align-items-center">
+
+                    {this.filterSaved.map(elm =>
+                        
+                        <ItinerariesCard key={elm._id} itinerary={elm} />
+                    )}
+
+                </Row>
+            </Container>
+        )
     }
 
- }
+}
 
 
 export default Profile
