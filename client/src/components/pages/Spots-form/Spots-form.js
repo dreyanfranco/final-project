@@ -1,30 +1,34 @@
 import React, { Component } from "react"
 import FilesService from "./../../../service/upload.service"
 import ItinerariesService from "./../../../service/itineraries.service"
+import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
+
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 
 class SpotForm extends Component {
     constructor() {
         super()
-
         this.state = {
-            name: "",
-            description: "",
-            image: "",
-            latitude: "",
-            longitude: "",
+            spot: {
+                description: "",
+                image: "",
+                location: {
+                    address: "",
+                    coordinates: []
+                }
+            }
         }
         this.itinerariesService = new ItinerariesService()
         this.filesService = new FilesService()
     }
 
-    handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
+    handleInputChange = e => this.setState({ spot: { ...this.state.spot, [e.target.name]: e.target.value} })
 
     handleSubmit = e => {
         e.preventDefault()
 
         this.itinerariesService
-            .newSpot(this.props.match.params.itinerary_id ,this.state)
+            .newSpot(this.props.match.params.itinerary_id, this.state.spot)
             .then(res => {
                 this.props.closeModal()
                 this.props.updateList()
@@ -42,25 +46,29 @@ class SpotForm extends Component {
             .uploadImageSpot(uploadData)
             .then(response => {
                 this.setState({
-                    image: response.data.secure_url,
+                    spot: {...this.state.spot, image: response.data.secure_url},
                     uploadingActive: false
                 })
             })
             .catch(err => console.log("ERRORRR!", err))
     }
 
+    handleLocation = spotLoc => {
+        let spotCopy = { ...this.state.spot, location: spotLoc }
+        this.setState({ spot: spotCopy })
+    }
 
     render() {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 12}}>
+                    <Col md={{ span: 12 }}>
                         <h1>Añadir Spot</h1>
                         <hr />
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} />
+                            <Form.Group controlId="location">
+                                <Form.Label>Localización</Form.Label>
+                                <Autocomplete getData={location => this.handleLocation(location)} />
                             </Form.Group>
                             <Form.Group controlId="description">
                                 <Form.Label>Descripción</Form.Label>
@@ -69,14 +77,6 @@ class SpotForm extends Component {
                             <Form.Group controlId="image">
                                 <Form.Label>Imagen</Form.Label>
                                 <Form.Control type="file" onChange={this.handleImageUpload} />
-                            </Form.Group>
-                            <Form.Group controlId="cityLocation">
-                                <Form.Label>Coordenadas</Form.Label>
-                                <br />
-                                <Form.Label size="sm">Latitud</Form.Label>
-                                <Form.Control type="text" name="latitude" value={this.state.latitude} onChange={this.handleInputChange} />
-                                <Form.Label size="sm">Longitud</Form.Label>
-                                <Form.Control type="text" name="longitude" value={this.state.longitude} onChange={this.handleInputChange} />
                             </Form.Group>
                             <Button variant="dark" type="submit">Enviar</Button>
                         </Form>

@@ -20,7 +20,7 @@ class MessageForm extends Component {
         this.itinerariesService
             .newMessage(this.props.match.params.itinerary_id, this.state)
             .then(res => {
-                this.props.updateList()
+                this.props.updateMessage()
             })
             .catch(err => console.log(err))
     }

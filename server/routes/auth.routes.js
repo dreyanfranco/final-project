@@ -38,6 +38,16 @@ router.get('/profile/save-itinerary/:itinerary_id', (req, res) => {
 
 })
 
+router.get('/profile/quit-itinerary/:itinerary_id', (req, res) => {
+
+    User
+        .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+
 router.post('/signup', (req, res) => {
 
     const { username, password, profileImage, description, role, itineraries } = req.body

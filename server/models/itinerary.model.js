@@ -27,6 +27,13 @@ const itinerariesSchema = new Schema({
     cityName: {
         type: String // google nombre ejemplo: madrid (autocomplete)
     },
+    location: {
+        type: {
+            type: String
+        },
+        address: String,
+        coordinates: [Number]
+    },
     description: {
         type: String,
         required: true,
@@ -36,12 +43,6 @@ const itinerariesSchema = new Schema({
     itineraryImage: {
         type: String,
         trim: true
-    },
-    cityLocation: {
-        type: {
-            type: String
-        },
-        coordinates: [Number]
     },
     duration: {
         type: String,
@@ -62,12 +63,12 @@ const itinerariesSchema = new Schema({
     messagesSum: {
         type: Number
     }
-    
+
 }, {
     timestamps: true
 })
 
-itinerariesSchema.index({ cityLocation: '2dsphere' })
+itinerariesSchema.index({ location: "2dsphere" })
 
 const Itineraries = mongoose.model("Itineraries", itinerariesSchema)
 module.exports = Itineraries
