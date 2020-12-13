@@ -47,7 +47,7 @@ class SimpleMap extends Component {
                             key={idx}
                             lat={elm.location.coordinates[0]}
                             lng={elm.location.coordinates[1]}
-                            text={elm.name}
+                            text={elm.location.address}
                             description={elm.description}
                             img={elm.image}
                         />

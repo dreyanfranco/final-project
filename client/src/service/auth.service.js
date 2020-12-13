@@ -17,5 +17,5 @@ export default class AuthService {
     editUser = userId => this.apiHandler.put(`/editUser/${userId}`)
     deleteUser = userId => this.apiHandler.delete(`/deleteUser/${userId}`)
     saveItinerary= itineraryId => this.apiHandler.get(`/profile/save-itinerary/${itineraryId}`)
-    deleteItinerary= itineraryId => this.apiHandler.get(`/profile/delete-itinerary/${itineraryId}`)
+    removeItinerary= itineraryId => this.apiHandler.get(`/profile/remove-itinerary/${itineraryId}`)
 }
