@@ -63,8 +63,6 @@ class SpotForm extends Component {
             <Container>
                 <Row>
                     <Col md={{ span: 12 }}>
-                        <h1>Añadir Spot</h1>
-                        <hr />
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="location">
                                 <Form.Label>Localización</Form.Label>

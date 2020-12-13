@@ -30,7 +30,6 @@ class SimpleMap extends Component {
         // use map and maps objects
         }
 
-        console.log(this.props.spots)
         return (
             // Important! Always set the container height explicitly
             <div style={{ height: '600px', width: '100%' }}>

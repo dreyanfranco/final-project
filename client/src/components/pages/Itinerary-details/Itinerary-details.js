@@ -10,6 +10,7 @@ import SpotForm from './../Spots-form/Spots-form'
 import MessageForm from './Message-form'
 import MessageCard from './Message-card'
 import SpotsCard from './Spots-card'
+import Popup from './../../shared/Modal/Modal'
 
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 
@@ -135,13 +136,9 @@ class ItineraryDetails extends Component {
                     :
                     <Loader />
                 }
-                <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
-                    <Modal.Body>
-                        <SpotForm closeModal={() => this.handleModal(false)} updateList={this.refreshItineraries} {...this.props} />
-                    </Modal.Body>
-
-                </Modal>
-
+                <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nuevo spot">
+                    <SpotForm closeModal={() => this.handleModal(false)} updateList={this.refreshItineraries} {...this.props} />
+                </Popup>
             </Container>
         )
     }
