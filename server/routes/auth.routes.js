@@ -38,7 +38,7 @@ router.get('/profile/save-itinerary/:itinerary_id', (req, res) => {
 
 })
 
-router.get('/profile/quit-itinerary/:itinerary_id', (req, res) => {
+router.get('/profile/remove-itinerary/:itinerary_id', (req, res) => {
 
     User
         .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })

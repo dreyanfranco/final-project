@@ -45,7 +45,32 @@ class ItineraryDetails extends Component {
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
+    removeItinerary = () => {
 
+        const itinerary_id = this.props.match.params.itinerary_id
+        this.authService
+            .removeItinerary(itinerary_id)
+            .then(() => this.props.history.push('/perfil'))
+            .catch(err => console.log(err))
+    }
+    deleteItinerary= () => {
+
+        const itinerary_id = this.props.match.params.itinerary_id
+        
+        this.itinerariesService
+            .deleteItinerary(itinerary_id)
+            .then(() => this.props.history.push('/perfil'))
+            .catch(err => console.log(err))
+    }
+    // deleteSpot= () => {
+
+    //     const itinerary_id = this.props.match.params.itinerary_id
+    //     const spot_id= this.props.match.params.spot_id
+    //     this.itinerariesService
+    //         .deleteItinerary({ itinerary_id, spot_id })
+    //         .then(() => this.props.history.push('/perfil'))
+    //         .catch(err => console.log(err))
+    // }
     handleModal = visible => this.setState({ showModal: visible })
 
     render() {
@@ -70,7 +95,10 @@ class ItineraryDetails extends Component {
                                     {
                                         this.state.itinerary.owner.username === this.props.loggedUser.username
                                             ?
+                                            <>
                                             <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
+                                            <Button onClick={this.deleteItinerary} variant="dark" size="sm">Borrar itinerario</Button>
+                                            </>
                                             :
                                             <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
 
@@ -78,7 +106,7 @@ class ItineraryDetails extends Component {
                                     {
                                         this.props.loggedUser.itinerariesSaved.includes(this.state.itinerary._id)
                                             ?
-                                            <Button onClick={this.saveItinerary} variant="dark" size="sm">Eliminar de favoritos</Button>
+                                            <Button onClick={this.removeItinerary} variant="dark" size="sm">Eliminar de favoritos</Button>
                                             :
                                             null
                                     }
@@ -94,7 +122,7 @@ class ItineraryDetails extends Component {
                             <h3>Listado de Spots</h3>
                             <Row>
                                 <Col md={{ span: 5 }}>
-                                    {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} />
+                                    {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} itinerary={this.state.itinerary._id} />
                                     )}
                                 </Col>
                                 <Col md={{ span: 7 }}>
@@ -113,7 +141,7 @@ class ItineraryDetails extends Component {
                                 </Col>
 
                                 <Col md={{ span: 5 }}>
-                                    <img src={this.state.itinerary.owner.profileImage} alt={this.state.itinerary.owner.username} />
+                                    <img className="profile" src={this.state.itinerary.owner.profileImage} alt={this.state.itinerary.owner.username}  />
                                 </Col>
 
                             </Row>

@@ -1,17 +1,18 @@
 
-import { Overlay } from 'react-bootstrap'
+import { Overlay, Button } from 'react-bootstrap'
 import React, { useRef, useState } from "react";
 
 function Marker({ text, description, img}) {
-    const [show, setShow] = useState(false);
-    const target = useRef(null);
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+  const handleClose = () => setShow(false);
 
   return (
     <>
-      <div  className="marker" ref={target} onClick={() => setShow(!show)}>
+      <div  className="marker" ref={target}  onClick={() => setShow(!show)}>
         
       </div>
-      <Overlay target={target.current} show={show} placement="right">
+      <Overlay target={target.current} show={show}  placement="right" >
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
             {...props}
@@ -23,11 +24,15 @@ function Marker({ text, description, img}) {
               ...props.style,
             }}
           >
-                      <h4>{text}</h4>
-                      <hr />
-                      <img src={img} alt={text} style={{width:"200px"}}/>
-                      <hr />    
-                      <p>{description}</p>
+            <Button variant="outline-dark" className="close-button" onClick={handleClose}>
+            x
+          </Button>          
+            <h4 className="spot-title-map">{text}</h4>
+            <hr />
+            <img src={img} alt={text} style={{width:"200px"}}/>
+            <hr />    
+            <p className="spot-description-map">{description}</p>
+            
           </div>
         )}
       </Overlay>

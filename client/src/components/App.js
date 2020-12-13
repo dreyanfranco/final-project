@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from './layout/Header'
+import Home from './pages/Home/Home'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import ItinerariesList from './pages/Itineraries-list/Itineraries-list'
@@ -47,6 +48,7 @@ class App extends Component {
 
         <main>
           <Switch>
+            <Route path="/" exact render={props => <Home {...props} />} />
             <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />

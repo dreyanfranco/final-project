@@ -1,7 +1,7 @@
-import { Col, Card, ButtonGroup } from 'react-bootstrap'
+import { Col, Card, ButtonGroup, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const SpotsCard = ({ spot }) => {
+const SpotsCard = ({ spot, itinerary }) => {
     return (
         <>
             <Card>
@@ -10,10 +10,9 @@ const SpotsCard = ({ spot }) => {
                 <Card.Body>
                     <ButtonGroup aria-label="Basic example" style={{ width: '100%' }}>
                         <Link className="btn btn-dark" to={`/spot/${spot._id}`}>Editar</Link>
-                        <Link className="btn btn-dark" to={`/spot/${spot._id}`}>Eliminar</Link>
-                        <Link className="btn btn-dark" to={`/spot/${spot._id}`}>Ver detalles</Link>
+                         
                     </ButtonGroup>
-                    <Link className="btn btn-dark btn-block btn-sm" to={`/spot/${spot._id}`}>Ver detalles</Link>
+                   
 
                 </Card.Body>
             </Card>

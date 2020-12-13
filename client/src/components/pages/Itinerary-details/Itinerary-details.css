@@ -1,6 +1,13 @@
+
 .itinerary-details img{
     width: 100%;
 }
 .description{
     margin-top:40px;
+}
+img.profile {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
 }

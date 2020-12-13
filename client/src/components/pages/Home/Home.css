@@ -1,0 +1,14 @@
+.hero{
+    background-image: url('https://res.cloudinary.com/drapkr7kb/image/upload/v1607861693/fotos-travel/h1-rev-slide1-bckg_piuajh.jpg');
+    height: 80vh;
+    background-position: center;
+    text-align: center;
+}
+.hero h1{
+    padding-top:10%;
+    font-family: 'La Belle Aurore', cursive;
+    text-align:center;
+    font-size: 5em;
+    color:#fff;
+
+}
