@@ -11,3 +11,20 @@ img.profile {
     border-radius: 50%;
     object-fit: cover;
 }
+.spot-card h4{
+    font-size:16px;
+    line-height: 24px;
+    width: 230px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.spot-card {
+    padding: 20px;
+    border: solid 1px;
+    margin-bottom: 20px;
+}
+.spots-list .spots{
+    max-height: 600px;
+    overflow: scroll;
+}

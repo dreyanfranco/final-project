@@ -121,7 +121,7 @@ class ItineraryDetails extends Component {
                         <section className="spots-list">
                             <h3>Listado de Spots</h3>
                             <Row>
-                                <Col md={{ span: 5 }}>
+                                <Col className="spots" md={{ span: 5 }}>
                                     {this.state.itinerary.spots.map(elm => <SpotsCard key={elm._id} spot={elm} itinerary={this.state.itinerary._id} />
                                     )}
                                 </Col>

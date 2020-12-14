@@ -5,3 +5,7 @@
 section{
     padding-top: 40px;
 }
+img.card-img-top {
+    max-height: 195px;
+    object-fit: cover;
+}
