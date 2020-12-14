@@ -33,7 +33,6 @@ class Login extends Component {
                 this.props.history.push('/perfil')
             })
             .catch(err => {
-                console.log({err})
                 this.setState({ showToast: true, toastText: err.response.data.message })
             })
     }
@@ -45,9 +44,7 @@ class Login extends Component {
         return (
             <>
                 <Container>
-
                     <Row>
-
                         <Col md={{ span: 6, offset: 3 }}>
                             <h1>Iniciar sesión</h1>
                             <hr />
@@ -65,7 +62,6 @@ class Login extends Component {
                             </Form>
                         </Col>
                     </Row>
-
                 </Container>
                 <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </>

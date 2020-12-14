@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 const Itineraries = require('../models/itinerary.model')
 const Spots = require('../models/spot.model')
-
+const User = require('../models/user.model')
 
 router.get('/getAllItineraries', (req, res) => {
 
@@ -34,6 +34,18 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get('/getAllItinerariesFromUser/:user_id', (req, res) => {
+
+    const userOwnedItineraries = Itineraries.find({ owner: req.params.user_id })
+    const userFavItineraries = User.findOne({ _id: req.params.user_id }, 'itinerariesSaved').populate('itinerariesSaved')
+
+    Promise.all([userOwnedItineraries, userFavItineraries])
+        .then(result => {
+            console.log(result);
+            res.json({ owned: result[0], favs: result[1].itinerariesSaved })
+        })
+})
+
 router.post('/newItinerary', (req, res) => {
 
     Itineraries
@@ -43,7 +55,7 @@ router.post('/newItinerary', (req, res) => {
 })
 
 router.put('/editItinerary', (req, res) => {
-    const { name, cityName, itineraryImage, description, duration, latitude, longitude } = req.body.editedItinerary 
+    const { name, cityName, itineraryImage, description, duration, latitude, longitude } = req.body.editedItinerary
     const cityLocation = {
         type: 'Point',
         coordinates: [latitude, longitude]
@@ -82,6 +94,23 @@ router.post('/newSpot', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get('/getOneSpot/:spot_id', (req, res) => {
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.spot_id)) {
+        res.status(404).json({ message: 'Invalid ID' })
+        return
+    }
+
+    Spots
+        .findById(req.params.spot_id)
+        .then(response => {
+            console.log(response)
+            res.json(response)
+        })
+        .catch(err => res.status(500).json(err))
+
+})
+
 router.put('/editSpot/:spot_id', (req, res) => {
 
     Spots
@@ -92,7 +121,7 @@ router.put('/editSpot/:spot_id', (req, res) => {
 
 
 router.delete('/:id/deleteSpot/:spot_id', (req, res) => {
-    
+
     Spots
         .findByIdAndDelete(req.params.spot_id)
         .then(() => Itineraries.findByIdAndUpdate(req.params.id, { $pull: { spots: req.params.spot_id } }, { new: true }))

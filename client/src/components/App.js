@@ -58,6 +58,8 @@ class App extends Component {
             <Route path="/editar-spot/:spot_id" render={props => <EditSpot {...props} /> } />
             <Route path="/crear-itinerario" render={props => this.state.loggedInUser ? <ItineraryForm loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} />} />
+            <Route path=":itinerary_id/spot/:spot_id" render={props => this.state.loggedInUser ? <ItineraryDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
+
           </Switch>
         </main>
       </>

@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-import { Popover, OverlayTrigger,Button } from 'react-bootstrap'
+import React, { Component } from 'react'
+import GoogleMapReact from 'google-map-react'
 import './Itinerary-map.css'
 
-
 import Marker from './Marker'
-
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -14,8 +11,6 @@ class SimpleMap extends Component {
         super(props)
         this.state = {}
     }
-
-
 
     static defaultProps = {
         center: {
@@ -27,7 +22,7 @@ class SimpleMap extends Component {
 
     render() {
         const handleApiLoaded = (map, maps) => {
-        // use map and maps objects
+            // use map and maps objects
         }
 
         return (
@@ -50,10 +45,7 @@ class SimpleMap extends Component {
                             description={elm.description}
                             img={elm.image}
                         />
-           
-                       
-                        
-                    )}    
+                    )}
                     {/* <AnyReactComponent
                         lat={this.props.location[0]}
                         lng={this.props.location[1]}
