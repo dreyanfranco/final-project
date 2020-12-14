@@ -10,7 +10,8 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            itineraries: [],
+            owned: [],
+            favs: []
         }
         this.itinerariesService = new ItinerariesService();
         this.authServices = new AuthServices
@@ -18,18 +19,15 @@ class Profile extends Component {
 
     componentDidMount = () => {
         this.itinerariesService
-            .getAllItineraries()
-            .then(res => this.setState({ itineraries: res.data }))
+            .getAllItinerariesFromUser(this.props.loggedUser._id)
+            .then(res => {
+                console.log(res.data)
+                this.setState({ owned: res.data.owned, favs: res.data.favs })
+            })
             .catch(err => console.log(err))
     }
-    filteredItineraries
-    filterSaved
 
     render() {
-
-        this.filteredItineraries = this.state.itineraries.filter(elm => elm.owner.username === this.props.loggedUser.username)
-        this.filterSaved = this.state.itineraries.filter(elm => this.props.loggedUser.itinerariesSaved.includes(elm._id))
-
         return (
             <Container>
                 <Row className="align-items-center">
@@ -45,20 +43,15 @@ class Profile extends Component {
                 </Row>
                 <hr />
                 <Row className="align-items-center">
-
-                    {this.filteredItineraries.map(elm =>
+                    {this.state.owned.map(elm =>
                         <ItinerariesCard key={elm._id} itinerary={elm} />
                     )}
-
                 </Row>
                 <hr />
                 <Row className="align-items-center">
-
-                    {this.filterSaved.map(elm =>
-                        
+                    {this.state.favs.map(elm =>
                         <ItinerariesCard key={elm._id} itinerary={elm} />
                     )}
-
                 </Row>
             </Container>
         )

@@ -12,7 +12,7 @@ import MessageCard from './Message-card'
 import SpotsCard from './Spots-card'
 import Popup from './../../shared/Modal/Modal'
 
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 class ItineraryDetails extends Component {
 
@@ -20,7 +20,8 @@ class ItineraryDetails extends Component {
         super()
         this.state = {
             itinerary: undefined,
-            showModal: false
+            showModal: false,
+            showModalDelete: false
         }
         this.itinerariesService = new ItinerariesService();
         this.authService = new AuthService()
@@ -53,10 +54,10 @@ class ItineraryDetails extends Component {
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
-    deleteItinerary= () => {
+    deleteItinerary = () => {
 
         const itinerary_id = this.props.match.params.itinerary_id
-        
+
         this.itinerariesService
             .deleteItinerary(itinerary_id)
             .then(() => this.props.history.push('/perfil'))
@@ -72,6 +73,7 @@ class ItineraryDetails extends Component {
     //         .catch(err => console.log(err))
     // }
     handleModal = visible => this.setState({ showModal: visible })
+    handleModalDelete = visible => this.setState({ showModalDelete: visible })
 
     render() {
 
@@ -96,8 +98,8 @@ class ItineraryDetails extends Component {
                                         this.state.itinerary.owner.username === this.props.loggedUser.username
                                             ?
                                             <>
-                                            <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
-                                            <Button onClick={this.deleteItinerary} variant="dark" size="sm">Borrar itinerario</Button>
+                                                <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
+                                                <Button onClick={() => this.handleModalDelete(true)} variant="dark" size="sm">Borrar itinerario</Button>
                                             </>
                                             :
                                             <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
@@ -141,7 +143,7 @@ class ItineraryDetails extends Component {
                                 </Col>
 
                                 <Col md={{ span: 5 }}>
-                                    <img className="profile" src={this.state.itinerary.owner.profileImage} alt={this.state.itinerary.owner.username}  />
+                                    <img className="profile" src={this.state.itinerary.owner.profileImage} alt={this.state.itinerary.owner.username} />
                                 </Col>
 
                             </Row>
@@ -164,6 +166,10 @@ class ItineraryDetails extends Component {
                     :
                     <Loader />
                 }
+                <Popup show={this.state.showModalDelete} handleModal={this.handleModalDelete} title="Borrar itinerario">
+                    <p>¿Seguro que quieres borrar este itinerario?</p>
+                    <Button closeModal={() => this.handleModalDelete(false)} onClick={this.deleteItinerary} variant="dark" size="sm">Borrar itinerario</Button>
+                </Popup>
                 <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nuevo spot">
                     <SpotForm closeModal={() => this.handleModal(false)} updateList={this.refreshItineraries} {...this.props} />
                 </Popup>
