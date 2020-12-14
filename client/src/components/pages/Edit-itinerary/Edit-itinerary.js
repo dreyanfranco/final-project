@@ -3,43 +3,44 @@ import FilesService from "./../../../service/upload.service"
 import ItinerariesService from "./../../../service/itineraries.service"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 
-class EditItinerary extends Component {
+import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
 
+class EditItinerary extends Component {
     constructor(props) {
         super(props)
-        this.state ={
-        itinerary:{
-            name: "",
-            cityName: "", // google maps autocomplete
-            description: "",
-            itineraryImage: "",
-            latitude: "",
-            longitude: "",
-            duration: "1 día",
-            
+        this.state = {
+            itinerary: {
+                name: "",
+                description: "",
+                itineraryImage: "",
+                location: {
+                    address: "",
+                    coordinates: []
+                },
+                duration: "1 día",
+                
+            }
         }
-        }
+
         this.itinerariesService = new ItinerariesService()
         this.filesService = new FilesService()
-
-        this.itinerariesService = new ItinerariesService();
     }
-
     componentDidMount() {
         const itinerary_id = this.props.match.params.itinerary_id
         this.itinerariesService
             .getItinerary(itinerary_id)
             .then(res => this.setState({ itinerary: res.data }))
             .catch(err => console.log(err))
-        console.log(this.state.itinerary)
+    
         
     }
     handleSubmit = e => {
         e.preventDefault()
         this.itinerariesService
-            .editItinerary(this.state.itinerary)
+            .editItinerary(this.state.itinerary._id, this.state.itinerary)
             .then(res => this.props.history.push(`/itinerario/${res.data._id}`)  )
             .catch(err => console.log(err))
+        console.log(this.state.itinerary._id)
     }
 
     handleImageUpload = e => {
@@ -50,37 +51,36 @@ class EditItinerary extends Component {
             .uploadImageItinerary(uploadData)
             .then(response => {
                 this.setState({
-                    itinerary: { ...this.state.itinerary, itineraryImage: response.data.secure_url },
+                    itinerary: { ...this.state.itinerary, itineraryImage: response.data.secure_url},
                     uploadingActive: false
                 })
             })
             .catch(err => console.log("ERRORRR!", err))
     }
 
-    handleInputChange = e => {
-    e.persist();
-
-    this.setState(prevState => ({
-    itinerary: { ...prevState.itinerary,  [e.target.name]: e.target.value }
-    }))
-}
+    handleLocation = city => {
+        let itineraryCopy = { ...this.state.itinerary, location: city }
+        this.setState({ itinerary: itineraryCopy })
+    }
+    
+    handleInputChange = e => this.setState({ itinerary: { ...this.state.itinerary, [e.target.name]: e.target.value } })
     render() {
         
         return (
             
-            <Container>
+                       <Container>
                 <Row>
                     <Col md={{ span: 6, offset: 3 }}>
-                        <h1>Editar {this.state.itinerary.name}</h1>
+                        <h1>Editar {this.state.itinerary.name}  </h1>
                         <hr />
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" name="name" value={this.state.itinerary.name} onChange={this.handleInputChange}  />
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control type="text" name="name" value={this.state.itinerary.name} onChange={this.handleInputChange} />
                             </Form.Group>
-                            <Form.Group controlId="cityName">
+                            <Form.Group controlId="location">
                                 <Form.Label>Nombre de ciudad</Form.Label>
-                                <Form.Control type="text" name="cityName" value={this.state.itinerary.cityName} onChange={this.handleInputChange} />
+                                <Autocomplete getData={location => this.handleLocation(location) }/>
                             </Form.Group>
                             <Form.Group controlId="description">
                                 <Form.Label>Descripción</Form.Label>
@@ -88,15 +88,7 @@ class EditItinerary extends Component {
                             </Form.Group>
                             <Form.Group controlId="itineraryImage">
                                 <Form.Label>Imagen</Form.Label>
-                                <Form.Control type="file"  onChange={this.handleImageUpload} />
-                            </Form.Group>
-                            <Form.Group controlId="cityLocation">
-                                <Form.Label>Coordenadas</Form.Label>
-                                <br />
-                                <Form.Label size="sm">Latitud</Form.Label>
-                                <Form.Control type="text" name="latitude" value={this.state.itinerary.latitude} onChange={this.handleInputChange} />
-                                <Form.Label size="sm">Longitud</Form.Label>
-                                <Form.Control type="text" name="longitude" value={this.state.itinerary.longitude} onChange={this.handleInputChange} />
+                                <Form.Control type="file" onChange={this.handleImageUpload} />
                             </Form.Group>
                             <Form.Group controlId="duration">
                                 <Form.Label>Duración de viaje</Form.Label>

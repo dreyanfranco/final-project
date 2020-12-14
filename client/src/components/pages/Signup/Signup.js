@@ -32,7 +32,10 @@ class Signup extends Component {
                 this.props.storeUser(theLoggedInUser.data)
                 this.props.history.push("/perfil")        
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                alert(err.response.data.message)
+                console.log({ err })
+            })
     }
     
     handleImageUpload = e => {

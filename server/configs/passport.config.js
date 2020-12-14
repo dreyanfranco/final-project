@@ -24,6 +24,7 @@ module.exports = app => {
     app.use(flash())
 
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
+
         User.findOne({ username })
             .then(user => {
                 if (!user) {
@@ -32,6 +33,7 @@ module.exports = app => {
                 if (!bcrypt.compareSync(password, user.password)) {
                     return next(null, false, { message: "Contraseña incorrecta" })
                 }
+                
                 return next(null, user)
             })
             .catch(err => res.status(500).json(err))

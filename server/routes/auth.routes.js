@@ -94,6 +94,8 @@ router.post('/login', (req, res, next) => {
             return;
         }
 
+    
+
         req.login(theUser, err => err ? res.status(500).json({ message: 'Session error' }) : res.status(200).json(theUser))
 
     })(req, res, next)
