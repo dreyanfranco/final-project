@@ -24,10 +24,7 @@ class ItinerariesList extends Component {
     }
 
     filterItineraries = value => {
-        console.log(value)
-        const filtered = this.state.itineraries.filter(elm => elm.name.includes(value))
-        console.log(filtered)
-
+        const filtered = this.state.itineraries.filter(elm => elm.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(value.toLowerCase()))
         this.setState({ filteredItineraries: filtered })
     }
 

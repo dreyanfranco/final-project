@@ -8,11 +8,6 @@ class SearchBar extends Component {
         }
     }
 
-    // handleInputChange = e => {
-    //     const { results } = e.target
-    //     this.setState({ [results]: value }, () => this.props.filterProduct(this.state.results))
-    // }
-
     handleInputChange = e => {
         const { value } = e.target
         this.setState({ results: value })

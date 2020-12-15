@@ -64,7 +64,7 @@ class ItineraryDetails extends Component {
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
- 
+
     handleModal = visible => this.setState({ showModal: visible })
     handleModalDelete = visible => this.setState({ showModalDelete: visible })
 
@@ -75,6 +75,7 @@ class ItineraryDetails extends Component {
                 {this.state.itinerary
                     ?
                     <>
+                        {console.log(this.state.itinerary.messages.map(elm => elm.rating).reduce((a, b) => a + b, 0) / this.state.itinerary.messages.length)}
                         <section className="itinerary">
                             <Row>
                                 <Col md={{ span: 6 }} >
@@ -86,7 +87,13 @@ class ItineraryDetails extends Component {
                                     <p>{this.state.itinerary.location.address}</p>
                                     <p>{this.state.itinerary.owner.username}</p>
                                     <p>Duración: {this.state.itinerary.duration}</p>
-                                    <p>Rating: {this.state.itinerary.messages.rating}</p>
+                                    {
+                                        this.state.itinerary.messages.length === 0
+                                            ?
+                                            <p>Rating: -</p>
+                                            :
+                                            <p> Rating: {this.state.itinerary.messages.map(elm => elm.rating).reduce((a, b) => a + b, 0) / this.state.itinerary.messages.length}</p>
+                                    }
                                     {
                                         this.state.itinerary.owner.username === this.props.loggedUser.username
                                             ?
@@ -106,7 +113,7 @@ class ItineraryDetails extends Component {
                                             :
                                             null
                                     }
-                                    
+
                                 </Col>
 
                                 <Col>
@@ -168,7 +175,7 @@ class ItineraryDetails extends Component {
                 <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nuevo spot">
                     <SpotForm closeModal={() => this.handleModal(false)} updateList={this.refreshItineraries} {...this.props} />
                 </Popup>
-            </Container>
+            </Container >
         )
     }
 }

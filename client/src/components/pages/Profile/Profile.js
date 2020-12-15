@@ -21,7 +21,6 @@ class Profile extends Component {
         this.itinerariesService
             .getAllItinerariesFromUser(this.props.loggedUser._id)
             .then(res => {
-                console.log(res.data)
                 this.setState({ owned: res.data.owned, favs: res.data.favs })
             })
             .catch(err => console.log(err))
