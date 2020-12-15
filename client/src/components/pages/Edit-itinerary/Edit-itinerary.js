@@ -41,7 +41,6 @@ class EditItinerary extends Component {
             .editItinerary(this.state.itinerary._id, this.state.itinerary)
             .then(res => this.props.history.push(`/itinerario/${res.data._id}`)  )
             .catch(err => console.log(err))
-        console.log(this.state.itinerary._id)
     }
 
     handleImageUpload = e => {

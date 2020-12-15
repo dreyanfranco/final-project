@@ -57,12 +57,6 @@ const itinerariesSchema = new Schema({
         ref: 'Spots'
     }],
     messages: [messageSchema],
-    messagesAmount: {
-        type: Number
-    },
-    messagesSum: {
-        type: Number
-    }
 
 }, {
     timestamps: true
