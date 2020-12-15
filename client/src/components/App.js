@@ -17,6 +17,7 @@ import ItineraryForm from './pages/Itinerary-form/Itinerary-form'
 import EditItinerary from './pages/Edit-itinerary/Edit-itinerary'
 import SpotsForm from './pages/Spots-form/Spots-form'
 import EditSpot from './pages/Edit-spots/Edit-spots'
+import SpotDetails from './pages/Spot-details/Spot-details'
 
 
 import AuthServices from './../service/auth.service'
@@ -54,11 +55,11 @@ class App extends Component {
             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/itinerarios" exact render={props => <ItinerariesList loggedUser={this.state.loggedInUser}  {...props} />} />
             <Route path="/itinerario/:itinerary_id" render={props => this.state.loggedInUser ? <ItineraryDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
-            <Route path="/editar-itinerario/:itinerary_id" render={props => <EditItinerary {...props} /> } />
+            <Route path="/editar-itinerario/:itinerary_id" render={props => this.state.loggedInUser ? <EditItinerary loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/editar-spot/:spot_id" render={props => <EditSpot {...props} /> } />
             <Route path="/crear-itinerario" render={props => this.state.loggedInUser ? <ItineraryForm loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
             <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} />} />
-            <Route path=":itinerary_id/spot/:spot_id" render={props => this.state.loggedInUser ? <ItineraryDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
+            <Route path="/:itinerary_id/spot/:spot_id" render={props => this.state.loggedInUser ? <SpotDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
 
           </Switch>
         </main>

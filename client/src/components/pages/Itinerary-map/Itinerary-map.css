@@ -1,8 +1,10 @@
 .marker{
-    width: 30px;
-    height: 30px;
-    background-color:rgb(123, 163, 238);
-    border-radius: 50%;
+    width: 20px;
+    height: 32px;
+    background-image:url(https://res.cloudinary.com/drapkr7kb/image/upload/v1607974563/fotos-travel/pin_cluwbc.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     
 }
 p.spot-description-map {

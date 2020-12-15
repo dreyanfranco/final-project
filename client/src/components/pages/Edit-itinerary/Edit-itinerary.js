@@ -18,6 +18,7 @@ class EditItinerary extends Component {
                     coordinates: []
                 },
                 duration: "1 día",
+                owner: this.props.loggedUser._id,
                 
             }
         }

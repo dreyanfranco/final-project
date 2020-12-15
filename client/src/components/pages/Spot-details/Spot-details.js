@@ -1,34 +1,80 @@
-import { Col, Card, ButtonGroup } from 'react-bootstrap'
+import React, { Component } from 'react'
+
+import ItinerariesService from './../../../service/itineraries.service';
+
+import Loader from './../../shared/Spinner/Loader'
+import './Spot-details.css'
+import SpotMap from './../Spot-map/Spot-map'
+
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const SpotDetails = ({ itinerary, loggedUser }) => {
-    return (
+class SpotDetails extends Component {
 
-        <Col lg={4}>
-            <Card>
-                <Card.Img variant="top" src={itinerary.itineraryImage} />
-                <Card.Title>{itinerary.name}</Card.Title>
-                <Card.Body>
-                    <Card.Text>creado por {itinerary.owner.username}</Card.Text>
-                    <Card.Text>{itinerary.duration} </Card.Text>
-                    {
-                        itinerary.owner === loggedUser
-                            ?
-                            {/* <ButtonGroup aria-label="Basic example" style={{ width: '100%' }}>
-                        <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Editar</Link> 
-                        <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Eliminar</Link> 
-                        <Link className="btn btn-dark" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
-                    </ButtonGroup> */}
-                            :
+    constructor() {
+        super()
+        this.state = {
+            spot: undefined,
+           
+        }
+        this.itinerariesService = new ItinerariesService();
+    }
 
-                            <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
+    componentDidMount = () =>  {
 
+        const spot_id= this.props.match.params.spot_id
+        console.log(this.props.match.params.spot_id)
+        this.itinerariesService
+            .getOneSpot(this.props.match.params.spot_id)
+            .then(res => this.setState({ spot: res.data }))
+            .catch(err => console.log(err))
+    }
 
-                    }
-                </Card.Body>
-            </Card>
-        </Col>
-    )
+    // deleteSpot= () => {
+
+    //     const itinerary_id = this.props.match.params.itinerary_id
+    //     const spot_id= this.props.match.params.spot_id
+    //     this.itinerariesService
+    //         .deleteItinerary({ itinerary_id, spot_id })
+    //         .then(() => this.props.history.push('/perfil'))
+    //         .catch(err => console.log(err))
+    // }
+
+    render() {
+
+        return (
+            
+            <Container className="spot-details" >
+                {this.state.spot
+                    ?
+                    <>
+                        <section className="spot">
+                            <Row>
+                                <Col md={{ span: 6 }} >
+                                    <img src={this.state.spot.image} alt={this.state.spot.location.address} />
+
+                                </Col>
+                                <Col md={{ span: 6 }} >
+                                    <h1>{this.state.spot.location.address}</h1>
+                                    <p className="description">{this.state.spot.description}</p>
+            
+                                </Col>
+
+                          
+                            </Row>
+                        </section>
+                        <section className="Map">
+                            <SpotMap location={this.state.spot.location.coordinates} spots={this.state.spot} />
+                        </section>
+                    
+
+                    </>
+                    :
+                    <Loader />
+                }
+             
+            </Container>
+        )
+    }
 }
-
 export default SpotDetails

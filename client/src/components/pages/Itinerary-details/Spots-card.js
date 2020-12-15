@@ -10,7 +10,7 @@ const SpotsCard = ({ spot, itinerary }) => {
                 </Col>
                 <Col md={{ span: 8 }} >
                     <h4>{spot.location.address}</h4>
-                        <Link className="btn btn-dark" to={`/spot/${spot._id}`}>Ver detalles</Link>
+                        <Link className="btn btn-dark" to={`/${itinerary}/spot/${spot._id}`}>Ver detalles</Link>
 
                 </Col>
             {/* <Card>

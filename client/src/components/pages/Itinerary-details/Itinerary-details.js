@@ -13,6 +13,7 @@ import SpotsCard from './Spots-card'
 import Popup from './../../shared/Modal/Modal'
 
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class ItineraryDetails extends Component {
 
@@ -63,15 +64,7 @@ class ItineraryDetails extends Component {
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
-    // deleteSpot= () => {
-
-    //     const itinerary_id = this.props.match.params.itinerary_id
-    //     const spot_id= this.props.match.params.spot_id
-    //     this.itinerariesService
-    //         .deleteItinerary({ itinerary_id, spot_id })
-    //         .then(() => this.props.history.push('/perfil'))
-    //         .catch(err => console.log(err))
-    // }
+ 
     handleModal = visible => this.setState({ showModal: visible })
     handleModalDelete = visible => this.setState({ showModalDelete: visible })
 
@@ -98,6 +91,7 @@ class ItineraryDetails extends Component {
                                         this.state.itinerary.owner.username === this.props.loggedUser.username
                                             ?
                                             <>
+                                                <Link className="btn btn-dark btn-sm" to={`/editar-itinerario/${this.state.itinerary._id}`}>Editar</Link>
                                                 <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Crear spot</Button>
                                                 <Button onClick={() => this.handleModalDelete(true)} variant="dark" size="sm">Borrar itinerario</Button>
                                             </>
@@ -112,6 +106,7 @@ class ItineraryDetails extends Component {
                                             :
                                             null
                                     }
+                                    
                                 </Col>
 
                                 <Col>

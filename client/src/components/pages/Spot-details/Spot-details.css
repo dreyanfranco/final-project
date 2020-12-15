@@ -1,0 +1,12 @@
+.spot img{
+    width: 100%;
+}
+.marker{
+    width: 20px;
+    height: 32px;
+    background-image:url(https://res.cloudinary.com/drapkr7kb/image/upload/v1607974563/fotos-travel/pin_cluwbc.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}

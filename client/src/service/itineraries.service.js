@@ -17,7 +17,7 @@ export default class ItinerariesService {
     deleteItinerary = itineraryId => this.apiHandler.delete(`/deleteItinerary/${itineraryId}`)
     newMessage = (itineraryId, message) => this.apiHandler.post(`/${itineraryId}/message`, { message })
     newSpot = (itineraryId, spotInfo) => this.apiHandler.post('/newSpot', { itineraryId, spotInfo })
-    getSpot = (itineraryId, spotId) => this.apiHandler.post(`/newSpot/${spotId}`, { itineraryId })
+    getOneSpot = spotId => this.apiHandler.get(`/getOneSpot/${spotId}`)
     editSpot = (spotId, editedSpot) => this.apiHandler.put(`/editSpot/${spotId}`, editedSpot )
     deleteSpot = (itineraryId, spotId) => this.apiHandler.delete('/deleteSpot', { itineraryId, spotId })
 }
