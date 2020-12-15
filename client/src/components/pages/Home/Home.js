@@ -13,7 +13,7 @@ class Home extends Component {
             itineraries: [],
         }
         this.itinerariesService = new ItinerariesService();
-        
+
     }
 
     componentDidMount = () => {
@@ -30,21 +30,21 @@ class Home extends Component {
 
         return (
             <>
-                 <Jumbotron fluid className="hero">
+                <Jumbotron fluid className="hero">
                     <Container>
                         <Row>
-                            <Col className="bg" md={{ span: 6, offset:3 }}>
-                        <h1>Travibe</h1>
-                        <p>
+                            <Col className="bg" md={{ span: 6, offset: 3 }}>
+                                <h1>Travibe</h1>
+                                <p>
                                     This is a modified jumbotron that occupies the entire horizontal space of
                                     its parent.
-                        </p>
+                                </p>
                             </Col>
                         </Row>
                     </Container>
                 </Jumbotron>
                 <Container>
-                    <h3 style={{textAlign:"center"}}>Cómo Funciona</h3>
+                    <h3 style={{ textAlign: "center" }}>Cómo Funciona</h3>
                     <hr />
                     <Row className="align-items-center justify-content-center">
                         <Col md={{ span: 3 }}>
@@ -62,32 +62,26 @@ class Home extends Component {
                             <h4>Registrate </h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas imperdiet, ligula at pulvinar mattis, tellus dui porta turpis, rhoncus volutpat sem turpis sed lacus.</p>
                         </Col>
-                         <Col md={{ span: 3 }}>
+                        <Col md={{ span: 3 }}>
                             <img src="https://res.cloudinary.com/drapkr7kb/image/upload/v1607863956/fotos-travel/about-icon-1_fiumus.png" alt="destination" />
                             <h4>Registrate </h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas imperdiet, ligula at pulvinar mattis, tellus dui porta turpis, rhoncus volutpat sem turpis sed lacus.</p>
                         </Col>
                     </Row>
                     <hr />
-                    <h3 style={{textAlign:"center"}}>Últimos itinerarios</h3>
+                    <h3 style={{ textAlign: "center" }}>Últimos itinerarios</h3>
                     <Row className="align-items-center">
-
                         {this.state.itineraries.map(elm =>
                             <ItinerariesCard key={elm._id} itinerary={elm} />
                         )}
-
                     </Row>
                     <hr />
                     <Row className="align-items-center">
-
-                
-                </Row>
+                    </Row>
                 </Container>
-        </>
+            </>
         )
     }
-
 }
-
 
 export default Home

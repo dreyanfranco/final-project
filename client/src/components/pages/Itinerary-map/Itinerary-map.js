@@ -26,7 +26,6 @@ class SimpleMap extends Component {
         }
 
         return (
-            // Important! Always set the container height explicitly
             <div style={{ height: '600px', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyCxQfr-VaQqyOGCylf9PbMafybyjxJzVIU' }}
@@ -35,7 +34,6 @@ class SimpleMap extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
-
                     {this.props.spots.map((elm, idx) =>
                         <Marker
                             key={idx}
@@ -46,11 +44,6 @@ class SimpleMap extends Component {
                             img={elm.image}
                         />
                     )}
-                    {/* <AnyReactComponent
-                        lat={this.props.location[0]}
-                        lng={this.props.location[1]}
-                        text="My Marker"
-                    /> */}
                 </GoogleMapReact>
             </div>
         );

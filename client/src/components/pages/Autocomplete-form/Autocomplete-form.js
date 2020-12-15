@@ -13,7 +13,6 @@ export default class GmapsPlaces extends Component {
 
     handleChange = address => {
         this.setState({ address });
-
     };
 
     handleSelect = address => {

@@ -1,9 +1,8 @@
-import { Col, Card} from 'react-bootstrap'
+import { Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const ItinerariesCard = ({ itinerary, loggedUser }) => {
+const ItinerariesCard = ({ itinerary }) => {
     return (
-        
         <Col lg={4}>
             <Card>
                 <Card.Img variant="top" src={itinerary.itineraryImage} />
@@ -11,7 +10,7 @@ const ItinerariesCard = ({ itinerary, loggedUser }) => {
                 <Card.Body>
                     <Card.Text>creado por {itinerary.owner.username}</Card.Text>
                     <Card.Text>{itinerary.duration} </Card.Text>
-                        <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
+                    <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
                 </Card.Body>
             </Card>
         </Col>

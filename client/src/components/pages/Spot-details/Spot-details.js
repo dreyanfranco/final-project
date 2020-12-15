@@ -9,19 +9,18 @@ import SpotMap from './../Spot-map/Spot-map'
 import Popup from './../../shared/Modal/Modal'
 
 
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 class SpotDetails extends Component {
 
     constructor() {
         super()
         this.state = {
-            itinerary:undefined,
+            itinerary: undefined,
             spot: undefined,
             showModal: false,
             showModalDelete: false
-           
+
         }
         this.itinerariesService = new ItinerariesService();
     }
@@ -31,21 +30,18 @@ class SpotDetails extends Component {
             .getItinerary(this.props.match.params.itinerary_id)
             .then(res => this.setState({ itinerary: res.data }))
             .catch(err => console.log(err))
-        
-
     }
-    refreshSpot = () =>  {
+    refreshSpot = () => {
+        const spot_id = this.props.match.params.spot_id
 
-        const spot_id= this.props.match.params.spot_id
-        
         this.itinerariesService
-            .getOneSpot(this.props.match.params.spot_id)
+            .getOneSpot(spot_id)
             .then(res => this.setState({ spot: res.data }))
             .catch(err => console.log(err))
     }
-    
 
-    deleteSpot= () => {
+
+    deleteSpot = () => {
         const itinerary_id = this.props.match.params.itinerary_id
         const spot_id = this.props.match.params.spot_id
 
@@ -57,10 +53,11 @@ class SpotDetails extends Component {
 
     handleModal = visible => this.setState({ showModal: visible })
     handleModalDelete = visible => this.setState({ showModalDelete: visible })
+
     render() {
-        
+
         return (
-            
+
             <Container className="spot-details" >
                 {this.state.spot && this.state.itinerary
                     ?
@@ -78,27 +75,27 @@ class SpotDetails extends Component {
                                         this.state.itinerary.owner._id === this.props.loggedUser._id
                                             ?
                                             <>
-                                            <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Editar</Button>
-                                            <Button onClick={() => this.handleModalDelete(true)} variant="dark" size="sm">Borrar Spot</Button>
+                                                <Button onClick={() => this.handleModal(true)} variant="dark" size="sm">Editar</Button>
+                                                <Button onClick={() => this.handleModalDelete(true)} variant="dark" size="sm">Borrar Spot</Button>
                                             </>
                                             :
                                             null
                                     }
                                 </Col>
 
-                          
+
                             </Row>
                         </section>
                         <section className="Map">
                             <SpotMap location={this.state.spot.location.coordinates} spots={this.state.spot} />
                         </section>
-                    
+
 
                     </>
                     :
                     <Loader />
                 }
-                    <Popup show={this.state.showModalDelete} handleModal={this.handleModalDelete} title="Borrar spot">
+                <Popup show={this.state.showModalDelete} handleModal={this.handleModalDelete} title="Borrar spot">
                     <p>¿Seguro que quieres borrar este spot?</p>
                     <Button closeModal={() => this.handleModalDelete(false)} onClick={this.deleteSpot} variant="dark" size="sm">Borrar spot</Button>
                 </Popup>

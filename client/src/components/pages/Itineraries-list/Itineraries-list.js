@@ -41,9 +41,7 @@ class ItinerariesList extends Component {
                                 <ItinerariesCard key={elm._id} itinerary={elm} />
                             )}
                         </Row>
-                        : <>
-
-                        </>
+                        : <></>
                     }
                 </Container>
             </>

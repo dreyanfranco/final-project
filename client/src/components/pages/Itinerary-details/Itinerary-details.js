@@ -69,14 +69,14 @@ class ItineraryDetails extends Component {
             .catch(err => console.log(err))
     }
     favs = () => {
-           this.itinerariesService
+        this.itinerariesService
             .getAllItinerariesFromUser(this.props.loggedUser._id)
             .then(res => {
                 this.setState({ favs: res.data.favs })
             })
             .catch(err => console.log(err))
     }
- 
+
     handleModal = visible => this.setState({ showModal: visible })
     handleModalDelete = visible => this.setState({ showModalDelete: visible })
 
@@ -95,13 +95,13 @@ class ItineraryDetails extends Component {
                             saveItinerary={this.saveItinerary}
                             removeItinerary={this.removeItinerary}
                         />
-                        <SpotsList spots={this.state.itinerary.spots} itinerary={this.state.itinerary}/>
+                        <SpotsList spots={this.state.itinerary.spots} itinerary={this.state.itinerary} />
 
 
-                        <ItineraryOwner owner={this.state.itinerary.owner}/>
+                        <ItineraryOwner owner={this.state.itinerary.owner} />
 
                         <section className="comments">
-                            
+
                             <Row>
                                 <Col>
                                     <h3>Comentarios:</h3>
@@ -117,7 +117,7 @@ class ItineraryDetails extends Component {
 
                     </>
                     :
-                    <Loader/>
+                    <Loader />
                 }
                 <Popup show={this.state.showModalDelete} handleModal={this.handleModalDelete} title="Borrar itinerario">
                     <p>¿Seguro que quieres borrar este itinerario?</p>
