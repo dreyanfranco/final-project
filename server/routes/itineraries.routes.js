@@ -56,7 +56,6 @@ router.post('/newItinerary', (req, res) => {
 
 router.put('/editItinerary/:itinerary_id', (req, res) => {
   
-    console.log(req.body.itinerary)
     Itineraries
         .findByIdAndUpdate(req.params.itinerary_id, req.body.itinerary )
         .then(response => res.json(response))
@@ -110,17 +109,16 @@ router.get('/getOneSpot/:spot_id', (req, res) => {
 router.put('/editSpot/:spot_id', (req, res) => {
 
     Spots
-        .findByIdAndUpdate(req.params.spot_id, req.body)
+        .findByIdAndUpdate(req.params.spot_id, req.body.spot)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
 
-router.delete('/:id/deleteSpot/:spot_id', (req, res) => {
-
+router.delete('/deleteSpot/:spot_id', (req, res) => {
     Spots
         .findByIdAndDelete(req.params.spot_id)
-        .then(() => Itineraries.findByIdAndUpdate(req.params.id, { $pull: { spots: req.params.spot_id } }, { new: true }))
+        .then(() => Itineraries.findByIdAndUpdate(req.body.itinerary_id, { $pull: { spots: req.params.spot_id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

@@ -22,7 +22,8 @@ class ItineraryDetails extends Component {
         this.state = {
             itinerary: undefined,
             showModal: false,
-            showModalDelete: false
+            showModalDelete: false,
+            favs: []
         }
         this.itinerariesService = new ItinerariesService();
         this.authService = new AuthService()
@@ -38,6 +39,7 @@ class ItineraryDetails extends Component {
             .getItinerary(itinerary_id)
             .then(res => this.setState({ itinerary: res.data }))
             .catch(err => console.log(err))
+        this.favs()
     }
     saveItinerary = () => {
 
@@ -64,12 +66,19 @@ class ItineraryDetails extends Component {
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
+    favs = () => {
+           this.itinerariesService
+            .getAllItinerariesFromUser(this.props.loggedUser._id)
+            .then(res => {
+                this.setState({ favs: res.data.favs })
+            })
+            .catch(err => console.log(err))
+    }
  
     handleModal = visible => this.setState({ showModal: visible })
     handleModalDelete = visible => this.setState({ showModalDelete: visible })
 
     render() {
-
         return (
             <Container className="itinerary-details" >
                 {this.state.itinerary
@@ -96,11 +105,19 @@ class ItineraryDetails extends Component {
                                                 <Button onClick={() => this.handleModalDelete(true)} variant="dark" size="sm">Borrar itinerario</Button>
                                             </>
                                             :
-                                            <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
+                                            null
 
                                     }
+                                      {
+                                        !this.state.favs.map(elm=>elm._id).includes(this.state.itinerary._id) && this.state.itinerary.owner.username != this.props.loggedUser.username
+                                            ?
+                                            <Button onClick={this.saveItinerary} variant="dark" size="sm">Guardar itinerario</Button>
+                                            :
+                                            null
+                                    }
+
                                     {
-                                        this.props.loggedUser.itinerariesSaved.includes(this.state.itinerary._id)
+                                        this.state.favs.map(elm=>elm._id).includes(this.state.itinerary._id)
                                             ?
                                             <Button onClick={this.removeItinerary} variant="dark" size="sm">Eliminar de favoritos</Button>
                                             :
@@ -159,7 +176,7 @@ class ItineraryDetails extends Component {
 
                     </>
                     :
-                    <Loader />
+                    <Loader/>
                 }
                 <Popup show={this.state.showModalDelete} handleModal={this.handleModalDelete} title="Borrar itinerario">
                     <p>¿Seguro que quieres borrar este itinerario?</p>
