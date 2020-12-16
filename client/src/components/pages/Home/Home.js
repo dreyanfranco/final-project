@@ -71,7 +71,7 @@ class Home extends Component {
                     <hr />
                     <h3 style={{ textAlign: "center" }}>Últimos itinerarios</h3>
                     <Row className="align-items-center">
-                        {this.state.itineraries.map(elm =>
+                        {this.state.itineraries.reverse().slice(0, 6).map(elm =>
                             <ItinerariesCard key={elm._id} itinerary={elm} />
                         )}
                     </Row>

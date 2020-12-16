@@ -36,14 +36,18 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
 
 router.get('/getAllItinerariesFromUser/:user_id', (req, res) => {
 
-    const userOwnedItineraries = Itineraries.find({ owner: req.params.user_id })
-    const userFavItineraries = User.findOne({ _id: req.params.user_id }, 'itinerariesSaved').populate('itinerariesSaved')
+    const userOwnedItineraries = Itineraries
+        .find({ owner: req.params.user_id })
+        .populate('owner')
+    const userFavItineraries = User
+        .findOne({ _id: req.params.user_id }, 'itinerariesSaved')
+        .populate({
+            path: 'itinerariesSaved',
+            populate: {path: 'owner'}
+        })
 
     Promise.all([userOwnedItineraries, userFavItineraries])
-        .then(result => {
-            console.log(result);
-            res.json({ owned: result[0], favs: result[1].itinerariesSaved })
-        })
+        .then(result => res.json({ owned: result[0], favs: result[1].itinerariesSaved }))
 })
 
 router.post('/newItinerary', (req, res) => {
@@ -55,9 +59,9 @@ router.post('/newItinerary', (req, res) => {
 })
 
 router.put('/editItinerary/:itinerary_id', (req, res) => {
-  
+
     Itineraries
-        .findByIdAndUpdate(req.params.itinerary_id, req.body.itinerary )
+        .findByIdAndUpdate(req.params.itinerary_id, req.body.itinerary)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

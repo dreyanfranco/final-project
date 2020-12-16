@@ -37,7 +37,7 @@ class ItinerariesList extends Component {
 
                     {this.state.itineraries.length ?
                         <Row>
-                            {this.state.filteredItineraries.map(elm =>
+                            {this.state.filteredItineraries.slice(0).reverse().map(elm =>
                                 <ItinerariesCard key={elm._id} itinerary={elm} />
                             )}
                         </Row>

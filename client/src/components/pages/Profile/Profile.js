@@ -13,8 +13,8 @@ class Profile extends Component {
             owned: [],
             favs: []
         }
-        this.itinerariesService = new ItinerariesService();
-        this.authServices = new AuthServices
+        this.itinerariesService = new ItinerariesService()
+        this.authServices = new AuthServices ()
     }
 
     componentDidMount = () => {
@@ -35,6 +35,8 @@ class Profile extends Component {
                         <h4>Sobre mi:</h4>
                         <p>{this.props.loggedUser.description} </p>
                         <Link className="btn btn-dark btn-sm" to={`/crear-itinerario`}>Crear Itinerario</Link>
+
+                        {/* <Link className="btn btn-dark btn-sm" to={`/listado-usuarios`}>Usuarios</Link> */}
                     </Col>
                     <Col md={{ span: 5 }}>
                         <img className="profile" src={this.props.loggedUser.profileImage} alt={this.props.loggedUser.username} />

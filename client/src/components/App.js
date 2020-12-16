@@ -3,7 +3,6 @@ import './App.css'
 
 import React, { Component } from 'react'
 
-
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from './layout/Header'
@@ -12,13 +11,13 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import ItinerariesList from './pages/Itineraries-list/Itineraries-list'
 import Profile from './pages/Profile/Profile'
+import AdminProfile from './pages/Profile/Admin-profile/Admin-profile'
 import ItineraryDetails from './pages/Itinerary-details/Itinerary-details'
 import ItineraryForm from './pages/Itinerary-form/Itinerary-form'
 import EditItinerary from './pages/Edit-itinerary/Edit-itinerary'
 import SpotsForm from './pages/Spots-form/Spots-form'
 import EditSpot from './pages/Edit-spots/Edit-spots'
 import SpotDetails from './pages/Spot-details/Spot-details'
-
 
 import AuthServices from './../service/auth.service'
 
@@ -38,7 +37,6 @@ class App extends Component {
       .catch(err => this.setTheUser(undefined))
   }
 
-
   setTheUser = user => this.setState({ loggedInUser: user })
 
   render() {
@@ -46,7 +44,6 @@ class App extends Component {
     return (
       <>
         <Header storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
-
         <main>
           <Switch>
             <Route path="/" exact render={props => <Home {...props} />} />
@@ -61,12 +58,12 @@ class App extends Component {
             <Route path="/:itinerary_id/crear-spots" render={props => <SpotsForm {...props} />} />
             <Route path="/:itinerary_id/spot/:spot_id" render={props => this.state.loggedInUser ? <SpotDetails loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
 
+            <Route path="/listado-usuarios" render={props => this.state.loggedInUser ? <AdminProfile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
           </Switch>
         </main>
       </>
     )
   }
 }
-
 
 export default App

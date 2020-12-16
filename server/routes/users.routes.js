@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
 
-
-const User = require("../models/user.model")
+const Itineraries = require('../models/itinerary.model')
+const User = require('../models/user.model')
 
 router.get('/getAllUsers', (req, res) => {
 
@@ -22,8 +22,11 @@ router.put('/editUser/:user_id', (req, res) => {
 
 router.delete('/deleteUser/:user_id', (req, res) => {
 
-    User
-        .findByIdAndDelete(req.params.user_id)
+    const deleteUser = User.findByIdAndDelete(req.params.user_id)
+    const deleteUserItineraries = Itineraries.findByIdAndDelete({ owner: req.params.user_id })
+    const deleteUserComments = Itineraries.findByIdAndDelete({ message: { user: req.params.user_id } })
+    console.log(deleteUserComments)
+    Promise.all([deleteUser, deleteUserItineraries, deleteUserComments])
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
