@@ -4,7 +4,8 @@ export default class ItinerariesService {
 
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: ('http://localhost:5000/api/itineraries'),
+            //baseURL: 'http://localhost:5000/api/itineraries',
+            baseURL: `${process.env.REACT_APP_API_URL}/itineraries`,
             withCredentials: true,
         })
     }
