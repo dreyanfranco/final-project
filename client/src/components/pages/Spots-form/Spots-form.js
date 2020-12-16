@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import FilesService from "./../../../service/upload.service"
 import ItinerariesService from "./../../../service/itineraries.service"
 import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
+import Loader from './../../shared/Spinner/Loader'
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 
@@ -15,8 +16,9 @@ class SpotForm extends Component {
                 location: {
                     address: "",
                     coordinates: []
-                }
-            }
+                },
+            },
+            uploadingActive: false,
         }
         this.itinerariesService = new ItinerariesService()
         this.filesService = new FilesService()
@@ -73,10 +75,10 @@ class SpotForm extends Component {
                                 <Form.Control as="textarea" rows={3} name="description" value={this.state.description} onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group controlId="image">
-                                <Form.Label>Imagen</Form.Label>
+                                <Form.Label>Imagen{this.state.uploadingActive && <Loader />}</Form.Label>
                                 <Form.Control type="file" onChange={this.handleImageUpload} />
                             </Form.Group>
-                            <Button variant="dark" type="submit">Enviar</Button>
+                            <Button variant="dark" type="submit"disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Enviar'}</Button>
                         </Form>
                     </Col>
                 </Row>

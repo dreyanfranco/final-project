@@ -3,6 +3,7 @@ import FilesService from "./../../../service/upload.service"
 import ItinerariesService from "./../../../service/itineraries.service"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
+import Loader from './../../shared/Spinner/Loader'
 
 class ItineraryForm extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class ItineraryForm extends Component {
                 },
                 duration: "1 día",
                 owner: this.props.loggedUser._id,
-            }
+            },
+            uploadingActive: false,
         }
 
         this.itinerariesService = new ItinerariesService()
@@ -76,7 +78,7 @@ class ItineraryForm extends Component {
                                 <Form.Control as="textarea" rows={3} name="description" value={this.state.description} onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group controlId="itineraryImage">
-                                <Form.Label>Imagen</Form.Label>
+                                <Form.Label>Imagen{this.state.uploadingActive && <Loader />}</Form.Label>
                                 <Form.Control type="file" onChange={this.handleImageUpload} />
                             </Form.Group>
                             <Form.Group controlId="duration">
@@ -91,7 +93,7 @@ class ItineraryForm extends Component {
                                     <option>7 días</option>
                                 </Form.Control>
                             </Form.Group>
-                            <Button variant="dark" type="submit">Enviar</Button>
+                            <Button variant="dark" type="submit"disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Enviar'}</Button>
                         </Form>
                     </Col>
                 </Row>

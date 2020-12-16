@@ -1,0 +1,12 @@
+.hero-list{
+    background-image: url('https://res.cloudinary.com/drapkr7kb/image/upload/v1608122937/fotos-travel/brujula3_ixslqs.jpg');
+    height: 60vh;
+    background-position: center;
+    text-align: left;
+    color:#fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hero-list .text{
+    padding-top: 50px;
+}
