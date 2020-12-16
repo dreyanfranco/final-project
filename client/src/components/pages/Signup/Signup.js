@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import AuthService from "./../../../service/auth.service"
 import FilesService from "./../../../service/upload.service"
 import Alert from './../../shared/Alert/Alert'
+import Loader from './../../shared/Spinner/Loader'
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 
@@ -77,14 +78,14 @@ class Signup extends Component {
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group controlId="profileImage">
-                                    <Form.Label>Imagen </Form.Label>
+                                    <Form.Label>Imagen{this.state.uploadingActive && <Loader />}</Form.Label>
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
                                 <Form.Group controlId="description">
                                     <Form.Label>Sobre ti: </Form.Label>
                                     <Form.Control as="textarea" rows={3} name="description" value={this.state.description} onChange={this.handleInputChange} />
                                 </Form.Group>
-                                <Button variant="dark" type="submit">Registrarme</Button>
+                                <Button variant="dark" type="submit"disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Registrarme'}</Button>
                             </Form>
                         </Col>
                     </Row>

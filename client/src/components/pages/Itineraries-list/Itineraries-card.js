@@ -8,8 +8,8 @@ const ItinerariesCard = ({ itinerary }) => {
                 <Card.Img variant="top" src={itinerary.itineraryImage} />
                 <Card.Title>{itinerary.name}</Card.Title>
                 <Card.Body>
-                    <Card.Text>creado por {itinerary.owner.username}</Card.Text>
-                    <Card.Text>{itinerary.duration} </Card.Text>
+                    <Card.Text><img className="image-card" src={itinerary.owner.profileImage}/> creado por {itinerary.owner.username}</Card.Text>
+                    <Card.Text className="duration">{itinerary.duration} </Card.Text>
                     <Link className="btn btn-dark btn-block btn-sm" to={`/itinerario/${itinerary._id}`}>Ver detalles</Link>
                 </Card.Body>
             </Card>
