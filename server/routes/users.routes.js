@@ -29,7 +29,7 @@ router.delete('/deleteUser/:user_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/profile/save-itinerary/:itinerary_id', (req, res) => {
+router.put('/profile/save-itinerary/:itinerary_id', (req, res) => {
 
     User
         .findByIdAndUpdate(req.user._id, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
@@ -38,7 +38,7 @@ router.get('/profile/save-itinerary/:itinerary_id', (req, res) => {
 
 })
 
-router.get('/profile/remove-itinerary/:itinerary_id', (req, res) => {
+router.put('/profile/remove-itinerary/:itinerary_id', (req, res) => {
 
     User
         .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })

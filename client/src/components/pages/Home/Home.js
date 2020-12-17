@@ -66,7 +66,7 @@ class Home extends Component {
                             <p>Puedes hacer tu propio itinerario y añadir tus spots favoritos de esa ciudad.</p>
                         </Col>
                     </Row>
-                    <div class="text-center">
+                    <div className="text-center">
                         <Link className="btn btn-dark center" to="/registro">Registrarse</Link>
                     </div>
                     <hr />
@@ -76,7 +76,7 @@ class Home extends Component {
                             <ItinerariesCard key={elm._id} itinerary={elm} />
                         )}
                     </Row>
-                    <div class="text-center">
+                    <div className="text-center">
                         <Link className="btn btn-dark center" to="/itinerarios">Ver todos los Itinerarios</Link>
                     </div>
                     <hr />
