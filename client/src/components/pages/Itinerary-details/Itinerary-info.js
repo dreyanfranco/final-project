@@ -19,7 +19,7 @@ const ItineraryInfo = ({ itinerary, user, favs, handleModal, handleModalDelete, 
                             ?
                             <p><img className="rating" src={star}/>  -</p>
                             :
-                            <p><img className="rating" src={star}/>  {itinerary.messages.map(elm => elm.rating).reduce((a, b) => a + b, 0) / itinerary.messages.length}</p>
+                            <p><img className="rating" src={star}/>  {(itinerary.messages.map(elm => elm.rating).reduce((a, b) => a + b, 0) / itinerary.messages.length).toFixed(1)}</p>
                     }
                     <p><img className="image-owner" src={itinerary.owner.profileImage}/> creado por {itinerary.owner.username}</p>
                     {
