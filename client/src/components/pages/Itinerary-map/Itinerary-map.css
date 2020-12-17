@@ -33,7 +33,7 @@ button.close-button {
 
 @media screen and (max-width: 780px) {
 .fade.show {
-    transform: translate3d(-96.667px, 1961.33px, 0px) !important;
+    display: none;
 }
 
 }
