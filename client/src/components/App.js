@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from './layout/Header'
+import Footer from './layout/Footer'
 import Home from './pages/Home/Home'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
@@ -61,6 +62,7 @@ class App extends Component {
             <Route path="/listado-usuarios" render={props => this.state.loggedInUser ? <AdminProfile loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
           </Switch>
         </main>
+        <Footer/>
       </>
     )
   }

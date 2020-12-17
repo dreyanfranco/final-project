@@ -12,15 +12,15 @@ function Marker({ text, description, img}) {
       <div  className="marker" ref={target}  onClick={() => setShow(!show)}>
         
       </div>
-      <Overlay target={target.current} show={show}  placement="right" >
+      <Overlay target={target.current} show={show}  placement="left" >
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
             {...props}
             style={{
-              backgroundColor: '#eee',
+              backgroundColor: '#fff',
               padding: '2px 10px',
               color: '#000',
-              borderRadius: 3,
+              borderRadius: 10,
               ...props.style,
             }}
           >

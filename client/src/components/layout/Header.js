@@ -24,7 +24,7 @@ class Header extends Component {
     render() {
 
         return (
-            <Navbar bg="light" expand="md">
+            <Navbar bg="light" expand="md" fixed="top">
                 <Link to="/">
                     <Navbar.Brand>
                         <img alt="Logotipo" src={logo}  height="30" className="d-inline-block align-top" />

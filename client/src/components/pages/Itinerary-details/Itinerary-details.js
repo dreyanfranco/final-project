@@ -107,11 +107,11 @@ class ItineraryDetails extends Component {
                                 <Col>
                                     <h4 className="description">Comentarios</h4>
                                     <MessageForm {...this.props} updateMessage={this.refreshItineraries} />
-                                    <ul>
+                                    
                                         {this.state.itinerary.messages.map(elm =>
                                             <MessageCard key={elm._id} message={elm} />
                                         )}
-                                    </ul>
+                                    
                                 </Col>
                             </Row>
                         </section>
