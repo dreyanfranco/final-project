@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
@@ -28,9 +28,8 @@ class AdminProfile extends Component {
             .catch(err => console.log(err))
     }
 
-    deleteUser = () => {
+    deleteUser = (user_id) => {
         
-        const user_id = this.state.users._id
         
         this.usersService
             .deleteUser(user_id)
@@ -50,7 +49,7 @@ class AdminProfile extends Component {
                                 <ul>
                                     {this.state.users.map(elm =>
                                         <li key={elm._id}>
-                                            <Link className="btn btn-dark btn-sm" to={`/`}>Eliminar usuario</Link>{elm.username}
+                                            {elm.username} <Button className="btn btn-dark btn-sm" onClick={() => this.deleteUser(elm._id) }>Eliminar usuario</Button>
                                         </li>
                                     )}
                                 </ul>

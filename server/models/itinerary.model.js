@@ -25,7 +25,7 @@ const itinerariesSchema = new Schema({
         set: text => text.charAt(0).toUpperCase() + text.substring(1)
     },
     cityName: {
-        type: String // google nombre ejemplo: madrid (autocomplete)
+        type: String 
     },
     location: {
         type: {
