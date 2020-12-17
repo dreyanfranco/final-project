@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     profileImage: {
         type: String,
-        trim: true
+        trim: true,
     },
     username: String,
     password: String,
@@ -22,7 +22,7 @@ const userSchema = new Schema({
     itinerariesSaved: [{
         type: Schema.Types.ObjectId,
         ref: 'Itineraries'
-    }],// para guardar itinerarios de otros users
+    }],
 }, {
     timestamps: true
 })

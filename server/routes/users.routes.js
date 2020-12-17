@@ -21,11 +21,9 @@ router.put('/editUser/:user_id', (req, res) => {
 })
 
 router.delete('/deleteUser/:user_id', (req, res) => {
-    console.log(req.params.user_id)
-
     const deleteUser = User.findByIdAndDelete(req.params.user_id)
     const deleteUserItineraries = Itineraries.findOneAndDelete({ owner: req.params.user_id })
-    const deleteUserComments = Itineraries.findByIdAndDelete({ message: { user: req.params.user_id } })
+
     Promise.all([deleteUser, deleteUserItineraries])
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
