@@ -30,7 +30,7 @@ router.delete('/deleteUser/:user_id', (req, res) => {
 })
 
 router.put('/profile/saveItinerary/:itinerary_id', (req, res) => {
-    res.send(req.user)
+    res.send('Aqui esta la repsuesta',req.user)
     // User
     //     .findByIdAndUpdate(req.user._id, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
     //     .then(response => res.json(response))
