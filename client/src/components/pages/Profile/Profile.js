@@ -32,7 +32,7 @@ class Profile extends Component {
                 <Row className="align-items-center">
                     <Col md={{ span: 7 }}>
                         <h1>¡Bienvenid@, {this.props.loggedUser.username} !</h1>
-                        <h4>Sobre mi:</h4>
+                        <h4 className="description">Descripción:</h4>
                         <p>{this.props.loggedUser.description} </p>
                         <Link className="btn btn-dark btn-sm" to={`/crear-itinerario`}>Crear Itinerario</Link>
 
@@ -43,13 +43,17 @@ class Profile extends Component {
                     </Col>
                 </Row>
                 <hr />
-                <Row className="align-items-center">
+                <h4 className="description">Mis itinerarios creados</h4>
+                <Row className="align-items-center profile-list">
+                    
                     {this.state.owned.map(elm =>
                         <ItinerariesCard key={elm._id} itinerary={elm} />
                     )}
                 </Row>
                 <hr />
-                <Row className="align-items-center">
+                <h4 className="description">Mis itinerarios guardados</h4>
+                <Row className="align-items-center profile-list">
+                    
                     {this.state.favs.map(elm =>
                         <ItinerariesCard key={elm._id} itinerary={elm} />
                     )}

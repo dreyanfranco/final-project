@@ -5,7 +5,7 @@ import SpotsCard from './Spots-card'
 const SpotsList = ({ spots, itinerary }) => {
     return (
         <section className="spots-list">
-            <h3>Listado de Spots</h3>
+            <h4 className="spots-list">Spots de {itinerary.name}</h4>
             <Row>
                 <Col className="spots" md={{ span: 5 }}>
                     {spots.map(elm => <SpotsCard key={elm._id} spot={elm} itinerary={itinerary._id} />

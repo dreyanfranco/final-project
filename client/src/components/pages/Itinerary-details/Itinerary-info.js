@@ -1,5 +1,6 @@
 import { Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import star from './star.png'
 const ItineraryInfo = ({ itinerary, user, favs, handleModal, handleModalDelete, saveItinerary, removeItinerary }) => {
 
     return (
@@ -8,19 +9,19 @@ const ItineraryInfo = ({ itinerary, user, favs, handleModal, handleModalDelete, 
             <Row>
                 <Col md={{ span: 6 }} >
                     <img src={itinerary.itineraryImage} alt={itinerary.name} />
+                    <p className="duration-details">{itinerary.duration}</p>
                 </Col>
                 <Col md={{ span: 6 }} >
                     <h1>{itinerary.name}</h1>
-                    <p>{itinerary.location.address}</p>
-                    <p>{itinerary.owner.username}</p>
-                    <p>Duración: {itinerary.duration}</p>
+                    <p className="city">{itinerary.location.address}</p>
                     {
                         itinerary.messages.length === 0
                             ?
-                            <p>Rating: -</p>
+                            <p><img className="rating" src={star}/>  -</p>
                             :
-                            <p> Rating: {itinerary.messages.map(elm => elm.rating).reduce((a, b) => a + b, 0) / itinerary.messages.length}</p>
+                            <p><img className="rating" src={star}/>  {itinerary.messages.map(elm => elm.rating).reduce((a, b) => a + b, 0) / itinerary.messages.length}</p>
                     }
+                    <p><img className="image-owner" src={itinerary.owner.profileImage}/> creado por {itinerary.owner.username}</p>
                     {
                         itinerary.owner.username === user.username
                             ?
@@ -48,7 +49,8 @@ const ItineraryInfo = ({ itinerary, user, favs, handleModal, handleModalDelete, 
                     }
                 </Col>
                 <Col>
-                    <p className="description">{itinerary.description}</p>
+                    <h4 className="description">SOBRE EL ITINERARIO</h4>
+                    <p>{itinerary.description}</p>
                 </Col>
             </Row>
         </section>

@@ -27,8 +27,8 @@ class Header extends Component {
             <Navbar bg="light" expand="md">
                 <Link to="/">
                     <Navbar.Brand>
-                        <img alt="Logotipo" src={logo} width="30" height="30" className="d-inline-block align-top" />
-                        {' '}Backpackers
+                        <img alt="Logotipo" src={logo}  height="30" className="d-inline-block align-top" />
+                        {' '}
                     </Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

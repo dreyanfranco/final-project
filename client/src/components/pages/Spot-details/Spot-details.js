@@ -62,7 +62,7 @@ class SpotDetails extends Component {
                 {this.state.spot && this.state.itinerary
                     ?
                     <>
-                        <section className="spot">
+                        <section className="itinerary-details">
                             <Row>
                                 <Col md={{ span: 6 }} >
                                     <img src={this.state.spot.image} alt={this.state.spot.location.address} />

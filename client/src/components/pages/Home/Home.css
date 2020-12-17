@@ -4,13 +4,12 @@
     background-position: center;
     text-align: center;
 }
-.hero h1{
-    padding-top:10%;
-    font-family: 'La Belle Aurore', cursive;
-    text-align:center;
-    font-size: 7em;
-    
-
+.hero h1 {
+    padding-top: 10%;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 4em;
+    font-weight: 700;
 }
 .hero .bg {
     background-image: url(https://res.cloudinary.com/drapkr7kb/image/upload/v1607864117/fotos-travel/h6-slider-graphic-1_hqistx.png);

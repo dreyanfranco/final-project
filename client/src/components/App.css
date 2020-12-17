@@ -15,13 +15,14 @@ body{
 }
 .btn-dark {
     color: #fff;
-    background-color: #f7785e;
-    border-color: #f7785e;
+    background-color: #3a2d51;
+    border-color: #3a2d51;
+    border-radius: 0;
 }
 .btn-dark:hover {
-    color: #f7785e;
+    color: #3a2d51;
     background-color:#fff;
-    border-color: #f7785e;
+    border-color: #3a2d51;
 }
 .card-title.h5 {
     color: #fff;
@@ -58,4 +59,16 @@ p.duration.card-text {
     margin-bottom: 30px;
     box-shadow: 4px 3px 10px 3px rgba(0,0,0,0.30);
     border-radius: 0.50rem;
+}
+a.link-card {
+    color: #19191a;
+}
+a.link-card:hover {
+    text-decoration:none;
+}
+h4.description {
+    margin-top: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3a2d51;
 }

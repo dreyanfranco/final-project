@@ -95,6 +95,7 @@ class ItineraryDetails extends Component {
                             saveItinerary={this.saveItinerary}
                             removeItinerary={this.removeItinerary}
                         />
+                       
                         <SpotsList spots={this.state.itinerary.spots} itinerary={this.state.itinerary} />
 
 
@@ -104,7 +105,7 @@ class ItineraryDetails extends Component {
 
                             <Row>
                                 <Col>
-                                    <h3>Comentarios:</h3>
+                                    <h4 className="description">Comentarios</h4>
                                     <MessageForm {...this.props} updateMessage={this.refreshItineraries} />
                                     <ul>
                                         {this.state.itinerary.messages.map(elm =>

@@ -34,7 +34,7 @@ class Home extends Component {
                     <Container>
                         <Row>
                             <Col className="bg" md={{ span: 6, offset: 3 }}>
-                                <h1>Travibe</h1>
+                                <h1>Travel<span>hop</span></h1>
                                 <p>
                                     This is a modified jumbotron that occupies the entire horizontal space of
                                     its parent.

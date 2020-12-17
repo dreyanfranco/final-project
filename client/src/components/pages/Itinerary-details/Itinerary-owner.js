@@ -4,10 +4,10 @@ const ItineraryOwner = ({ owner }) => {
     return (
         <>
             <section className="about-owner">
-                <Row>
+                <Row className="align-items-center">
                     <hr />
                     <Col md={{ span: 7 }}>
-                        <h3>Sobre {owner.username}</h3>
+                        <h4 className="description">Sobre {owner.username}</h4>
                         <p>{owner.description}</p>
                     </Col>
                     <Col md={{ span: 5 }}>

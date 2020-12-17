@@ -1,5 +1,5 @@
 import {Row, Col} from 'react-bootstrap'
-
+import star from './star.png'
 
 const MessageCard = ({ message }) => {
     return (
@@ -9,7 +9,7 @@ const MessageCard = ({ message }) => {
             
         </Col>
             <Col md={{ span: 10 }}>
-                    <h4 style={{textAlign:"right"}}>Rating:{message.rating}</h4>
+                    <h4 style={{textAlign:"right"}}><img className="rating" src={star}/> {message.rating}</h4>
                     <h4>{message.user.username}</h4>
                 <hr />
                 <p>{message.text}</p>
