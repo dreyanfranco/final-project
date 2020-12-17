@@ -1,3 +1,4 @@
+
 .hero{
     background-image: url('https://res.cloudinary.com/drapkr7kb/image/upload/v1607861693/fotos-travel/h1-rev-slide1-bckg_piuajh.jpg');
     height: 80vh;
@@ -5,11 +6,12 @@
     text-align: center;
 }
 .hero h1 {
-    padding-top: 10%;
+    padding-top: 20%;
     text-transform: uppercase;
     text-align: center;
     font-size: 4em;
     font-weight: 700;
+    color:#fff;
 }
 .hero .bg {
     background-image: url(https://res.cloudinary.com/drapkr7kb/image/upload/v1607864117/fotos-travel/h6-slider-graphic-1_hqistx.png);
@@ -17,4 +19,41 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+.hero p {
+    margin-top: 40px;
+    color: #fff;
+    font-weight: 500;
+}
+
+h3.home-itineraries {
+    margin: 40px 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f7785d;
+}
+h3.home {
+    margin: 40px 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3a2d51;
+}
+.text-center h4 {
+    font-size: 1.2em;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3a2d51;
+}
+.text-center img {
+    width: 100px;
+}
+@media screen and (max-width: 780px) {
+.hero{
+    height: 50vh;
+
+}
+.hero h1 {
+    font-size: 3em;
+}
 }

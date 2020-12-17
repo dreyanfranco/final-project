@@ -37,10 +37,7 @@ class ItinerariesList extends Component {
                         <Row>
                             <Col className="text"  md={{ span: 6 }}>
                                 <h2>¿Cuál será tu próximo destino?</h2>
-                                <p>
-                                    This is a modified jumbotron that occupies the entire horizontal space of
-                                    its parent.
-                                </p>
+                                <p>Busca el nombre de la ciudad que deseas visitar</p>
                                 <SearchBar filter={this.filterItineraries} />
                             </Col>
                         </Row>

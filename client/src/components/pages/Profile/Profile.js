@@ -28,7 +28,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <Container>
+            <Container className="profile">
                 <Row className="align-items-center">
                     <Col md={{ span: 7 }}>
                         <h1>¡Bienvenid@, {this.props.loggedUser.username} !</h1>

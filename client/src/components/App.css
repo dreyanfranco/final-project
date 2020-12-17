@@ -1,3 +1,7 @@
+main {
+    margin-top: 50px;
+    min-height: 100vh;
+}
 .avatar{
     border-radius: 50%;
     border:solid 1px;
@@ -71,4 +75,18 @@ h4.description {
     text-transform: uppercase;
     font-weight: 700;
     color: #3a2d51;
+}
+.auth {
+    margin-top: 80px;
+}
+a:hover {
+    color: #f7785d;
+    text-decoration: underline;
+}
+p.footer {
+  background-color: #3a2d51;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0;
 }

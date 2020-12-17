@@ -43,7 +43,7 @@ class Login extends Component {
 
         return (
             <>
-                <Container>
+                <Container className="auth">
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <h1>Iniciar sesión</h1>

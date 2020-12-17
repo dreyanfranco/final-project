@@ -63,7 +63,7 @@ class Signup extends Component {
     render() {
         return (
             <>
-                <Container>
+                <Container className="auth">
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <h1>Registro de usuario</h1>
