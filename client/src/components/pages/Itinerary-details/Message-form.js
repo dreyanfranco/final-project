@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import ItinerariesService from "./../../../service/itineraries.service"
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Row, Col } from "react-bootstrap"
 
 class MessageForm extends Component {
     constructor(props) {
@@ -28,16 +28,18 @@ class MessageForm extends Component {
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="rating" >
-                    <Form.Label>Rating</Form.Label>
-                    <Form.Control name="rating" as="select" value={this.state.rating} onChange={this.handleInputChange}>
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </Form.Control>
+                <Form.Group as={Row} controlId="rating" >
+                    <Form.Label column sm="3">Valora el itinerario</Form.Label>
+                    <Col sm="9">
+                        <Form.Control name="rating" as="select" value={this.state.rating} onChange={this.handleInputChange}>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </Form.Control>
+                    </Col>
                 </Form.Group>
                 <Form.Group controlId="text">
                     <Form.Control name="text" as="textarea" placeholder="Deja tu comentario" rows="3" value={this.state.text} onChange={this.handleInputChange} />

@@ -14,7 +14,7 @@ class Profile extends Component {
             favs: []
         }
         this.itinerariesService = new ItinerariesService()
-        this.authServices = new AuthServices ()
+        this.authServices = new AuthServices()
     }
 
     componentDidMount = () => {
@@ -35,8 +35,12 @@ class Profile extends Component {
                         <h4 className="description">Descripción:</h4>
                         <p>{this.props.loggedUser.description} </p>
                         <Link className="btn btn-dark btn-sm" to={`/crear-itinerario`}>Crear Itinerario</Link>
-
-                        {/* <Link className="btn btn-dark btn-sm" to={`/listado-usuarios`}>Usuarios</Link> */}
+                        {
+                            this.props.loggedUser.role === 'ADMIN'
+                                ?
+                                <Link className="btn btn-dark btn-sm" to={`/listado-usuarios`}>Usuarios</Link>
+                                : null
+                        }
                     </Col>
                     <Col md={{ span: 5 }}>
                         <img className="profile" src={this.props.loggedUser.profileImage} alt={this.props.loggedUser.username} />
