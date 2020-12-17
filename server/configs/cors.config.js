@@ -4,7 +4,7 @@ const whitelist = [process.env.DOMAIN_REMOTE, process.env.DOMAIN_LOCAL]
 
 const corsOptions = {
     origin: (origin, cb) => {
-        const originIsWhitelisted = whitelist.includes(origin)
+        const originIsWhitelisted = true
         cb(null, originIsWhitelisted)
     },
     credentials: true
