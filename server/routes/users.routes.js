@@ -29,21 +29,19 @@ router.delete('/deleteUser/:user_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/profile/save-itinerary/:itinerary_id', (req, res) => {
-    res.send('funciono')
-    // User
-    //     //.findByIdAndUpdate(req.user._id, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
-    //     .findByIdAndUpdate(req.user._id, { username: req.user._id }, { new: true })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+router.put('/profile/saveItinerary/:itinerary_id', (req, res) => {
+
+    User
+        .findByIdAndUpdate(req.user._id, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
 
 })
 
-router.put('/profile/remove-itinerary/:itinerary_id', (req, res) => {
+router.put('/profile/removeItinerary/:itinerary_id', (req, res) => {
 
     User
-        //.findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
-        .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } })
+        .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

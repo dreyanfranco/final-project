@@ -13,6 +13,6 @@ export default class UsersService {
     getAllUsers = () => this.apiHandler.get('/getAllUsers')
     editUser = userId => this.apiHandler.put(`/editUser/${userId}`)
     deleteUser = userId => this.apiHandler.delete(`/deleteUser/${userId}`)
-    saveItinerary= itineraryId => this.apiHandler.put(`/profile/save-itinerary/${itineraryId}`)
-    removeItinerary= itineraryId => this.apiHandler.put(`/profile/remove-itinerary/${itineraryId}`)
+    saveItinerary= itineraryId => this.apiHandler.put(`/profile/saveItinerary/${itineraryId}`)
+    removeItinerary= itineraryId => this.apiHandler.put(`/profile/removeItinerary/${itineraryId}`)
 }
