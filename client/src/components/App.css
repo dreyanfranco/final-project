@@ -1,6 +1,6 @@
 main {
     margin-top: 50px;
-    min-height: 100vh;
+ 
 }
 .avatar{
     border-radius: 50%;
@@ -77,7 +77,8 @@ h4.description {
     color: #3a2d51;
 }
 .auth {
-    margin-top: 80px;
+    margin-top: 100px;
+    margin-bottom: 500px;
 }
 a:hover {
     color: #f7785d;
