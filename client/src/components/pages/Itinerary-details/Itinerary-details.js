@@ -49,7 +49,7 @@ class ItineraryDetails extends Component {
         this.usersService
             .saveItinerary(itinerary_id)
             .then(() => this.props.history.push('/perfil'))
-            .catch(err => console.log(err))
+            .catch(err => console.log({err}))
     }
     removeItinerary = () => {
 
@@ -57,7 +57,7 @@ class ItineraryDetails extends Component {
         this.usersService
             .removeItinerary(itinerary_id)
             .then(() => this.props.history.push('/perfil'))
-            .catch(err => console.log(err))
+            .catch(err => console.log({err}))
     }
     deleteItinerary = () => {
 
