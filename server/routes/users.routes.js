@@ -34,7 +34,10 @@ router.put('/profile/saveItinerary/:itinerary_id', (req, res) => {
     User
         .findByIdAndUpdate(req.user._id, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => {
+            console.log('este es el error de guardar itinerario de favoritos', err)
+            res.status(500).json(err)
+        })
 })
 
 router.put('/profile/removeItinerary/:itinerary_id', (req, res) => {
@@ -42,7 +45,10 @@ router.put('/profile/removeItinerary/:itinerary_id', (req, res) => {
     User
         .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => {
+            console.log('este es el error de borrar itinerario de favoritos', err)
+            res.status(500).json(err)
+        })
 })
 
 module.exports = router
