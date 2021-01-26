@@ -32,16 +32,17 @@ router.delete('/deleteUser/:user_id', (req, res) => {
 router.put('/profile/saveItinerary/:itinerary_id', (req, res) => {
 
     User
-        .findByIdAndUpdate(req.user._id, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
-        .then(response => res.json(response))
+        .findByIdAndUpdate(req.body.userId, { $push: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
+        .then(response => {
+            res.json(response)
+        })
         .catch(err => res.status(500).json(err))
-    
 })
 
 router.put('/profile/removeItinerary/:itinerary_id', (req, res) => {
 
     User
-        .findByIdAndUpdate(req.user._id, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
+        .findByIdAndUpdate(req.body.userId, { $pull: { itinerariesSaved: req.params.itinerary_id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

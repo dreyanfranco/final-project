@@ -46,16 +46,18 @@ class ItineraryDetails extends Component {
     saveItinerary = () => {
 
         const itinerary_id = this.props.match.params.itinerary_id
+        const user_id = this.props.loggedUser._id
         this.usersService
-            .saveItinerary(itinerary_id)
+            .saveItinerary(itinerary_id, user_id)
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }
     removeItinerary = () => {
 
         const itinerary_id = this.props.match.params.itinerary_id
+        const user_id = this.props.loggedUser._id
         this.usersService
-            .removeItinerary(itinerary_id)
+            .removeItinerary(itinerary_id, user_id)
             .then(() => this.props.history.push('/perfil'))
             .catch(err => console.log(err))
     }

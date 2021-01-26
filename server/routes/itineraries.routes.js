@@ -28,7 +28,6 @@ router.get('/getOneItinerary/:itinerary_id', (req, res) => {
         .populate('spots')
         .populate('messages.user')
         .then(response => {
-            console.log(response)
             res.json(response)
         })
         .catch(err => res.status(500).json(err))
